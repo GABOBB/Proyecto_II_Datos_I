@@ -3,24 +3,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
  */
 package c_interface;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import javafx.scene.control.Alert;
+import javafx.scene.layout.Pane;
 
 public class C_interface extends Application {
+    
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(C_interface.class.getResource("visual/interfaceC.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage pstage){
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(C_interface.class.getResource("/visual/FXMLmain.fxml"));
+            Pane ventana = (Pane) loader.load();
+            Scene scene = new Scene(ventana);
+            pstage.setScene(scene);
+            FXMLmainC c = loader.getController();
+            //c.setStage(pstage);
+            pstage.show();
+        }catch(IOException e){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setHeaderText(null);
+            a.setTitle("Error");
+            a.setContentText("error cargando la ventana");
+            a.showAndWait();  
+            
+            System.err.println(e);
+        }
     }
 
     public static void main(String[] args) {
@@ -44,6 +60,6 @@ public class C_interface extends Application {
         } catch (IOException e) {
             System.out.println(e);
         }
-        launch();
+        launch(args);
     }
 }

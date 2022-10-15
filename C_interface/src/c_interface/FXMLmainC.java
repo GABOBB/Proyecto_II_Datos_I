@@ -6,14 +6,20 @@ package c_interface;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
  *
  * @author Gabriel
  */
-public class InterfaceCController implements Initializable {
+public class FXMLmainC implements Initializable {
+
+    @FXML
+    private Button intento_B;
 
     /**
      * Initializes the controller class.
@@ -22,5 +28,10 @@ public class InterfaceCController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void bBb(ActionEvent event) {
+        System.out.println("hola como estamos");
+    }
     
 }
