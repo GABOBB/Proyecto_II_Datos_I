@@ -18,7 +18,9 @@ import javafx.scene.layout.Pane;
 public class C_interface extends Application {
     
     @Override
+    
     public void start(Stage pstage){
+        send("Hello world from client!!");
         try{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(C_interface.class.getResource("/visual/FXMLmain.fxml"));
@@ -40,17 +42,22 @@ public class C_interface extends Application {
     }
 
     public static void main(String[] args) {
+        launch(args);
+    }
+    
+    public void send(String a){
         final String HOST = "127.0.0.1";
         final int PORT = 5000;
         DataInputStream in;
         DataOutputStream out;
+        
         try {
             Socket clientSocket = new Socket(HOST, PORT);
 
             in = new DataInputStream(clientSocket.getInputStream());
             out = new DataOutputStream(clientSocket.getOutputStream());
 
-            out.writeUTF("Hello world from client!!");
+            out.writeUTF(a);
 
             String message = in.readUTF();
             System.out.println(message);
@@ -60,6 +67,5 @@ public class C_interface extends Application {
         } catch (IOException e) {
             System.out.println(e);
         }
-        launch(args);
     }
 }

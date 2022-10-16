@@ -6,9 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="c_interface.FXMLmainC">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c_interface.FXMLmainC">
    <children>
-      <Button fx:id="intento_B" layoutX="274.0" layoutY="175.0" mnemonicParsing="false" onAction="#bBb" text="intento " />
+      <Button fx:id="intento_B" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#bBb" text="intento " />
+      <TextField fx:id="t_f" layoutX="90.0" layoutY="14.0" />
    </children>
 </AnchorPane>
