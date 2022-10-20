@@ -9,5 +9,14 @@ package estructuras_de_datos;
  * @author Gabriel
  */
 public class Nodo_AVL {
+    String data; 
+    Nodo_AVL left; 
+    Nodo_AVL right; 
     
+    int height;
+    
+    public Nodo_AVL(String data) {
+        this.data = data; 
+        height = 1;
+    }
 }
