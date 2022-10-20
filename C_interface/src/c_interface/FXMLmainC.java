@@ -1,4 +1,4 @@
- package c_interface;
+package c_interface;
 
 import java.net.URL;
 import java.util.ResourceBundle;
