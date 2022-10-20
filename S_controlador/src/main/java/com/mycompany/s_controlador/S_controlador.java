@@ -20,7 +20,7 @@ public class S_controlador {
         DataOutputStream out;
         final int PORT = 5000;
         final boolean FLAG = true;
-
+       
         try {
             serverSocket = new ServerSocket(PORT);
             System.out.println("Server is On !");
