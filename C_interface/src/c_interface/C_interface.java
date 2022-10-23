@@ -45,7 +45,7 @@ public class C_interface extends Application {
         launch(args);
     }
     
-    public void send(String a){
+    public String send(String a){
         final String HOST = "127.0.0.1";
         final int PORT = 5000;
         DataInputStream in;
@@ -63,8 +63,10 @@ public class C_interface extends Application {
             System.out.println(message);
 
             clientSocket.close();
+            return message;
         } catch (IOException e) {
             System.out.println(e);
         }
+        return null;
     }
 }
