@@ -7,18 +7,18 @@ package estructuras_de_datos;
 public class Arbol_AVL {
     Nodo_AVL root;
     
-    int height(Nodo_AVL N) {
+    public int height(Nodo_AVL N) {
         if (N == null)
             return 0;
         
         return N.height;
     }
     
-    int max(int a, int b) {
+    private int max(int a, int b) {
         return (a > b) ? a : b;
     }
     
-   Nodo_AVL rotacionDerecha(Nodo_AVL y){
+   public Nodo_AVL rotacionDerecha(Nodo_AVL y){
        Nodo_AVL x = y.left;
        Nodo_AVL T2 = x.right;
        
@@ -29,8 +29,8 @@ public class Arbol_AVL {
        x.height = max(height(x.left), height(x.right)) + 1;
        
        return x;
-}
-   Nodo_AVL rotacionIzquierda (Nodo_AVL x){
+   }
+   public Nodo_AVL rotacionIzquierda (Nodo_AVL x){
        Nodo_AVL y = x.right;
        Nodo_AVL T2 = y.left;
        
@@ -42,14 +42,14 @@ public class Arbol_AVL {
        y.height = max(height(y.left), height(x.right)) + 1;
        
        return y;
-}
-   int getBalance(Nodo_AVL N){
+   }
+   public int getBalance(Nodo_AVL N){
        if (N == null)
            return 0;
        return height(N.left) - height(N.right);
    }
    
-    Nodo_AVL insert(Nodo_AVL node, String key) {
+    public Nodo_AVL insert(Nodo_AVL node, String key) {
         if (node == null)
             return (new Nodo_AVL(key));
  
@@ -82,7 +82,7 @@ public class Arbol_AVL {
         return node;
     }
  
-    void preOrder(Nodo_AVL node) {
+    public void preOrder(Nodo_AVL node) {
         if (node != null) {
             System.out.print(node.data + " ");
             preOrder(node.left);

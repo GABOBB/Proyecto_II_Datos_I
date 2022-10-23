@@ -34,6 +34,9 @@ public class S_controlador {
 
                 String message = in.readUTF();
                 System.out.println(message);
+                if (message.equals("FILECHOOSER")){
+                    System.out.println("Works");
+                }
 
                 out.writeUTF("Message received");
 

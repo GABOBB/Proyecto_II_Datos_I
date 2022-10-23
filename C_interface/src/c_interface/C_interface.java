@@ -63,7 +63,6 @@ public class C_interface extends Application {
             System.out.println(message);
 
             clientSocket.close();
-
         } catch (IOException e) {
             System.out.println(e);
         }

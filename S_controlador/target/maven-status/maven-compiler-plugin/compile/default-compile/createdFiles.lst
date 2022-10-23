@@ -1,1 +1,15 @@
+AlgoritmosOrdenamiento\BubbleSort.class
+AlgoritmosOrdenamiento\Quicksort.class
+FilesLoader\FileChooser.class
+estructuras_de_datos\Arbol_AVL.class
+AlgoritmosOrdenamiento\Radix.class
+com\mycompany\s_controlador\Archivos.class
 com\mycompany\s_controlador\S_controlador.class
+estructuras_de_datos\ArbolBinarioBusqueda.class
+estructuras_de_datos\NodoArbolBinario.class
+estructuras_de_datos\Lista_D_E_C.class
+estructuras_de_datos\Nodo_D_E_C.class
+estructuras_de_datos\DCLinkedList.class
+estructuras_de_datos\DoublyNode.class
+estructuras_de_datos\Nodo_AVL.class
+FilesLoader\FileInList.class

@@ -16,16 +16,17 @@ import java.util.Scanner;
  */
 public class FileInList {
     public static DCLinkedList<String> LoadFileOfStringsIntoDCLinkedList(File file) throws FileNotFoundException {
-        DCLinkedList<String> list = new DCLinkedList<>();
-        //Se coloca en el scanner el archivo para leerlo
-        Scanner scan = new Scanner(file);
-        //Se hace un while para que se lea mientras haya siguiente línea
-        scan.useDelimiter("[^A-Za-z]+");
-        while (scan.hasNextLine()){
-            list.add(scan.nextLine());
+            DCLinkedList<String> list = new DCLinkedList<>();
+            Scanner scan = new Scanner(file);
+
+            int count = 0;
+
+            while(scan.hasNext()) {
+                String word = scan.next();
+                list.add(word);
+                count = count + 1;
+            }
+
+            return list;
         }
-        return list;
-    }
-    
-    
 }

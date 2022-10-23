@@ -14,11 +14,15 @@ import javafx.scene.control.TextField;
  * @author Gabriel
  */
 public class FXMLmainC implements Initializable {
+    
+    @FXML
+    private Button LoadTxt;
 
     @FXML
     private Button intento_B;
     @FXML
     private TextField t_f;
+    C_interface a = new C_interface();
 
     /**
      * Initializes the controller class.
@@ -32,9 +36,13 @@ public class FXMLmainC implements Initializable {
 
     @FXML
     private void bBb(ActionEvent event) {
-        C_interface a = new C_interface();
         String d = t_f.getText();
         a.send(d);
     }
     
+    @FXML
+    void ltxt(ActionEvent event) {
+        String d = "FILECHOOSER";
+        a.send(d);
+    }
 }
