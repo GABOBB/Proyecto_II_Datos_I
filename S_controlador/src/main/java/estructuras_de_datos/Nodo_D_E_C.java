@@ -54,5 +54,6 @@ public class Nodo_D_E_C {
     public void set_P(Nodo_D_E_C _P){//setea el nodo anterior en la lista (_P)
         this._P = _P;
     }
+    
 }
    
