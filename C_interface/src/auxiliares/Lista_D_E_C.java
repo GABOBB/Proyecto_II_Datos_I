@@ -28,13 +28,18 @@ public class Lista_D_E_C {
     }
     
     public void add_n_last(Nodo_D_E_C nodo){//añade un nodo al final de la lista
-        this.size++;
-        Nodo_D_E_C a = this.head;
-        nodo.set_N(a);
-        a = a.get_P();
-        nodo.set_P(a);
-        a.set_N(nodo);
-        nodo.get_N().set_P(nodo);
+        if(this.head==null){
+            this.size++;
+            this.head=nodo;
+        }else{
+            this.size++;
+            Nodo_D_E_C a = this.head;
+            nodo.set_N(a);
+            a = a.get_P();
+            nodo.set_P(a);
+            a.set_N(nodo);
+            nodo.get_N().set_P(nodo);
+        }
     }
     
     public void add_n(Nodo_D_E_C a, Nodo_D_E_C nodo){//añade un nodo en una pocicion espesifica de la lista

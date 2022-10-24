@@ -30,9 +30,8 @@ public class FXMLmainC implements Initializable {
     private Button intento_B;
     @FXML
     private TextField t_f;
-    private TabPane __tabs = new TabPane();
     @FXML
-    private TabPane __tab;
+    private TabPane __tabs = new TabPane();
 
 
     /**

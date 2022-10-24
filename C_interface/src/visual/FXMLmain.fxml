@@ -13,6 +13,6 @@
       <Button fx:id="intento_B" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#bBb" text="intento " />
       <TextField fx:id="t_f" layoutX="89.0" layoutY="14.0" onAction="#bBb" />
       <Button fx:id="LoadTxt" layoutX="629.0" layoutY="14.0" mnemonicParsing="false" onAction="#ltxt" prefHeight="25.0" prefWidth="104.0" text="Cargar Archivos" />
-      <TabPane fx:id="__tab" layoutX="14.0" layoutY="52.0" prefHeight="481.0" prefWidth="726.0" tabClosingPolicy="UNAVAILABLE" />
+      <TabPane fx:id="__tabs" layoutX="14.0" layoutY="52.0" prefHeight="481.0" prefWidth="726.0" tabClosingPolicy="UNAVAILABLE" />
    </children>
 </AnchorPane>

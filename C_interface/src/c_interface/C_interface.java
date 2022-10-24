@@ -28,8 +28,7 @@ public class C_interface extends Application {
             FXMLmainC c = loader.getController();
             //c.setStage(pstage);
             pstage.show();
-            try{c.cargaI(send("hola"));
-            }catch(Exception e){System.err.println(e);}
+            c.cargaI(send("hola"));
         }catch(IOException e){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setHeaderText(null);
