@@ -44,6 +44,12 @@ public class FXMLmainC implements Initializable {
        
     }    
     
+    @FXML
+    private void ltxt(ActionEvent event) {
+        String d = "FILECHOOSER";
+        this.__c.send(d);
+    }
+    
     public void cargaI(String all_html){
         //System.out.println(all_html);
         String[] temp=(all_html.split("-_-"));
@@ -59,54 +65,42 @@ public class FXMLmainC implements Initializable {
             __tabNew.setContent(ed);
             __tabs.getTabs().add(__tabNew);
             Nodo_D_E_C nodo = new Nodo_D_E_C(aux1,__tabNew);
-            this.__lis.add_n_first(nodo);
-            System.out.println("y ahora esto porque no funca");
-            
+            this.__lis.add_n_first(nodo); 
         }
     }
     
     @FXML
     private void bBb(ActionEvent event) {
         String d = this.t_f.getText();
-        String[] temp=(this.__c.send(d)).split("|");
-        for(String t : temp){
-            String aux1 = t.split("@@@")[0];
-            String aux2 = t.split("@@@")[1];
-            Nodo_D_E_C nodo = add_tap(aux1);
-            configtab(nodo,t);
-        }
+        String html_text = __c.send(d);
+        configtab(html_text);
     }
     
-    @FXML
-    private void ltxt(ActionEvent event) {
-        String d = "FILECHOOSER";
-        this.__c.send(d);
-    }
-    
-    private Nodo_D_E_C add_tap(String a){
-        Tab __tabN = new Tab();
-        __tabN.setText(a);
-        HTMLEditor ed = new HTMLEditor();
-        __tabN.setContent(ed);
-        this.__tabs.getTabs().add(__tabN);
-        Nodo_D_E_C nodo = new Nodo_D_E_C(a,__tabN);
-        this.__lis.add_n_first(nodo);
-        return nodo;
-    }
-    
-    private void configtab(Nodo_D_E_C n, String i){
-        try{
-            Tab a = (Tab) n.getData();
-            //a.setText(i.split("@@@")[0]);
-            HTMLEditor htmle = (HTMLEditor) a.getContent();
-            htmle.setHtmlText(i.split("@@@")[1]);
-        }catch(Exception e){
-            Alert Aa = new Alert(Alert.AlertType.ERROR);
-            Aa.setHeaderText(null);
-            Aa.setTitle("Error");
-            Aa.setContentText("hubo un error cargando el texto");
-            Aa.showAndWait();
-            System.out.println(e);
+    private void configtab(String i){
+        String[] temp = i.split("-_-");
+        Nodo_D_E_C nodo = this.__lis.getHead();
+        for(int j=0;j<temp.length;j++){
+            
+            String aux1 = temp[j].split("@@@")[0];
+            String aux2 = temp[j].split("@@@")[1];
+            
+            if(nodo!=null){
+                Tab _tab_ = (Tab) nodo.getData();
+                _tab_.setText(aux1);
+                HTMLEditor ed = new HTMLEditor();
+                ed.setHtmlText(aux2);
+                _tab_.setContent(ed);
+            }else{
+                Tab new_tab = new Tab(aux1);
+                HTMLEditor ed = new HTMLEditor();
+                ed.setHtmlText(aux2);
+
+                new_tab.setContent(ed);
+                __tabs.getTabs().add(new_tab);
+                
+                Nodo_D_E_C new_nodo = new Nodo_D_E_C(aux1,new_tab);
+                this.__lis.add_n_first(new_nodo);
+            }
         }
     }
 }

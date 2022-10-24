@@ -30,6 +30,8 @@ public class Lista_D_E_C {
     public void add_n_last(Nodo_D_E_C nodo){//añade un nodo al final de la lista
         if(this.head==null){
             this.size++;
+            nodo.set_N(nodo);
+            nodo.set_P(nodo);
             this.head=nodo;
         }else{
             this.size++;
