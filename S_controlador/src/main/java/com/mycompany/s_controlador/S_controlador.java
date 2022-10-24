@@ -23,11 +23,11 @@ public class S_controlador {
        
         try {
             serverSocket = new ServerSocket(PORT);
-            System.out.println("Server is On !");
+            System.out.println("Server is On!");
 
             while (true) {
                 clientSocket = serverSocket.accept();
-                System.out.println("Client Connected");
+                System.out.println("Client Connected [1]");
 
                 in = new DataInputStream(clientSocket.getInputStream());
                 out = new DataOutputStream(clientSocket.getOutputStream());
@@ -38,10 +38,10 @@ public class S_controlador {
                     System.out.println("Works");
                 }
 
-                out.writeUTF("Message received");
+                out.writeUTF("colo@@@<html><head></head><body contenteditable=\"false\">hola<font color = red> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body contenteditable=\"false\">hola como estamos</body></html>");
 
                 clientSocket.close();
-                System.out.println("client disconnected");
+                System.out.println("client disconnected[1]");
             }
         } catch (IOException e) {
             Logger.getLogger(S_controlador.class.getName()).log(Level.SEVERE, null, e);

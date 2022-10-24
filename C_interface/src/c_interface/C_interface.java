@@ -18,9 +18,7 @@ import javafx.scene.layout.Pane;
 public class C_interface extends Application {
     
     @Override
-    
     public void start(Stage pstage){
-        send("Hello world from client!!");
         try{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(C_interface.class.getResource("/visual/FXMLmain.fxml"));
@@ -30,6 +28,8 @@ public class C_interface extends Application {
             FXMLmainC c = loader.getController();
             //c.setStage(pstage);
             pstage.show();
+            try{c.cargaI(send("hola"));
+            }catch(Exception e){System.err.println(e);}
         }catch(IOException e){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setHeaderText(null);
@@ -60,12 +60,13 @@ public class C_interface extends Application {
             out.writeUTF(a);
 
             String message = in.readUTF();
-            System.out.println(message);
+            //System.out.println(message+"1");
+            
 
             clientSocket.close();
             return message;
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e+"1");
         }
         return null;
     }
