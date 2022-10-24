@@ -65,7 +65,7 @@ public class FXMLmainC implements Initializable {
             __tabNew.setContent(ed);
             __tabs.getTabs().add(__tabNew);
             Nodo_D_E_C nodo = new Nodo_D_E_C(aux1,__tabNew);
-            this.__lis.add_n_first(nodo); 
+            this.__lis.add_n_last(nodo); 
         }
     }
     
@@ -101,6 +101,7 @@ public class FXMLmainC implements Initializable {
                 Nodo_D_E_C new_nodo = new Nodo_D_E_C(aux1,new_tab);
                 this.__lis.add_n_first(new_nodo);
             }
+            nodo = nodo.get_N();
         }
     }
 }
