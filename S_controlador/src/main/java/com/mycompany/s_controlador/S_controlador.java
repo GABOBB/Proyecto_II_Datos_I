@@ -38,7 +38,7 @@ public class S_controlador {
                     System.out.println("Works");
                 }
 
-                out.writeUTF("colo@@@<html><head></head><body contenteditable=\"false\">hola<font color = red> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body contenteditable=\"false\">hola como estamos</body></html>");
+                out.writeUTF("colo@@@<html><head></head><body>hola<font color = red> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
 
                 clientSocket.close();
                 System.out.println("client disconnected[1]");

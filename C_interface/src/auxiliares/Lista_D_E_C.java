@@ -12,8 +12,12 @@ public class Lista_D_E_C {
     }
     
     public void add_n_first(Nodo_D_E_C nodo){//añade un nodo al principio de la lista
-        if(this.head!=null){
+        if(this.size==0){
+            this.head=nodo;
+            nodo.set_N(nodo);
+            nodo.set_P(nodo);
             this.size++;
+        }else{
             Nodo_D_E_C a = this.head;
             nodo.set_N(a);
             a = a.get_P();
@@ -21,9 +25,7 @@ public class Lista_D_E_C {
             a.set_N(nodo);
             nodo.get_N().set_P(nodo);
             this.head = nodo;
-        }else{
             this.size++;
-            this.head=nodo;
         }
     }
     

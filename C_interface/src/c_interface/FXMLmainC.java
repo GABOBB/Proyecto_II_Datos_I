@@ -55,10 +55,11 @@ public class FXMLmainC implements Initializable {
             Tab __tabNew = new Tab(aux1);
             HTMLEditor ed = new HTMLEditor();
             ed.setHtmlText(aux2);
+            
             __tabNew.setContent(ed);
             __tabs.getTabs().add(__tabNew);
-            //Nodo_D_E_C nodo = new Nodo_D_E_C(aux1,__tabNew);
-            //this.__lis.add_n_first(nodo);
+            Nodo_D_E_C nodo = new Nodo_D_E_C(aux1,__tabNew);
+            this.__lis.add_n_first(nodo);
             System.out.println("y ahora esto porque no funca");
             
         }
