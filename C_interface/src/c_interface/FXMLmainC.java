@@ -49,6 +49,7 @@ public class FXMLmainC implements Initializable {
         String d = "FILECHOOSER";
         this.__c.send(d);
     }
+     
     
     public void cargaI(String all_html){
         //System.out.println(all_html);
