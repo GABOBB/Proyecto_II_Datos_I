@@ -47,13 +47,14 @@ public class FXMLmainC implements Initializable {
     @FXML
     private void ltxt(ActionEvent event) {
         String d = "FILECHOOSER";
-        this.__c.send(d);
+        String html = this.__c.send(d);
+        configtab(html);
     }
     
     public void cargaI(String all_html){
         //System.out.println(all_html);
         String[] temp=(all_html.split("-_-"));
-        for(int i=0;i<temp.length;i++){//System.out.println(temp[i]+"[1]");System.out.println(aux1+"[2]");System.out.println(aux2+"[3]");
+        for(int i=0;i<temp.length;i++){
             
             String aux1 = temp[i].split("@@@")[0];
             String aux2 = temp[i].split("@@@")[1];
@@ -63,7 +64,7 @@ public class FXMLmainC implements Initializable {
             ed.setHtmlText(aux2);
             
             __tabNew.setContent(ed);
-            __tabs.getTabs().add(__tabNew);
+            this.__tabs.getTabs().add(__tabNew);
             Nodo_D_E_C nodo = new Nodo_D_E_C(aux1,__tabNew);
             this.__lis.add_n_last(nodo); 
         }
@@ -78,30 +79,31 @@ public class FXMLmainC implements Initializable {
     
     private void configtab(String i){
         String[] temp = i.split("-_-");
+        System.out.println("--"+temp.length);
         Nodo_D_E_C nodo = this.__lis.getHead();
         for(int j=0;j<temp.length;j++){
             
             String aux1 = temp[j].split("@@@")[0];
             String aux2 = temp[j].split("@@@")[1];
-            
-            if(nodo!=null){
-                Tab _tab_ = (Tab) nodo.getData();
-                _tab_.setText(aux1);
-                HTMLEditor ed = new HTMLEditor();
-                ed.setHtmlText(aux2);
-                _tab_.setContent(ed);
-            }else{
-                Tab new_tab = new Tab(aux1);
-                HTMLEditor ed = new HTMLEditor();
-                ed.setHtmlText(aux2);
+            try{
+                if(nodo!=null){
+                    Tab _tab_ = (Tab) nodo.getData();
+                    _tab_.setText(aux1);
+                    HTMLEditor ed = new HTMLEditor();
+                    ed.setHtmlText(aux2);
+                    _tab_.setContent(ed);
+                    nodo = nodo.get_N();
+                }else{
+                    Tab new_tab = new Tab(aux1);
+                    HTMLEditor ed = new HTMLEditor();
+                    ed.setHtmlText(aux2);
 
-                new_tab.setContent(ed);
-                __tabs.getTabs().add(new_tab);
-                
-                Nodo_D_E_C new_nodo = new Nodo_D_E_C(aux1,new_tab);
-                this.__lis.add_n_first(new_nodo);
-            }
-            nodo = nodo.get_N();
+                    new_tab.setContent(ed);
+                    this.__tabs.getTabs().add(new_tab);
+                    Nodo_D_E_C new_nodo = new Nodo_D_E_C(aux1,new_tab);
+                    this.__lis.add_n_first(new_nodo);
+                }
+            }catch(Exception e){System.err.println(e);}
         }
     }
 }

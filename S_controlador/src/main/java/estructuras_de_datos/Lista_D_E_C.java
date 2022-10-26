@@ -24,6 +24,8 @@ public class Lista_D_E_C {
         }else{
             this.size++;
             this.head=nodo;
+            nodo.set_N(nodo);
+            nodo.set_P(nodo);
         }
     }
     

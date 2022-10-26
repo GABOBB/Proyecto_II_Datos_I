@@ -36,9 +36,12 @@ public class S_controlador {
                 System.out.println(message);
                 if (message.equals("FILECHOOSER")){
                     System.out.println("Works");
+                    out.writeUTF("sincolo@@@<html><head></head><body>hola como estamos</body></html>");
+                }else{
+                    out.writeUTF("colo@@@<html><head></head><body>hola<font color = red> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
                 }
 
-                out.writeUTF("colo@@@<html><head></head><body>hola<font color = red> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
+                
 
                 clientSocket.close();
                 System.out.println("client disconnected[1]");
