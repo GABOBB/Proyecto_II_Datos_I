@@ -8,19 +8,21 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 /**
  * @author Gabriel
  */
 public class S_controlador {
 
- public static void main(String[] args) {
+ public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = null;
         Socket clientSocket = null;
         DataInputStream in;
         DataOutputStream out;
         final int PORT = 5000;
         final boolean FLAG = true;
-       
+        
         try {
             serverSocket = new ServerSocket(PORT);
             System.out.println("Server is On!");
@@ -34,15 +36,11 @@ public class S_controlador {
 
                 String message = in.readUTF();
                 System.out.println(message);
-                if (message.equals("FILECHOOSER")){
-                    System.out.println("Works");
-                    out.writeUTF("sincolo@@@<html><head></head><body>hola como estamos</body></html>");
-                }else{
-                    out.writeUTF("colo@@@<html><head></head><body>hola<font color = red> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
-                }
-
+                if (message.equals("FILECHOOSER")){out.writeUTF("sincolo@@@<html><head></head><body>hola como estamos</body></html>");
+                    
+                }else{out.writeUTF("colo**@@@<html><head></head><body>hola<font color = green> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
                 
-
+                }
                 clientSocket.close();
                 System.out.println("client disconnected[1]");
             }
