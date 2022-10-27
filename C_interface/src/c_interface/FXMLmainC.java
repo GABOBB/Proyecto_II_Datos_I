@@ -34,7 +34,8 @@ public class FXMLmainC implements Initializable {
     @FXML
     private TabPane __tabs = new TabPane();
     @FXML
-    private ComboBox Op_busqueda;
+    private Button serch_tipe;
+    
 
 
     /**
@@ -44,14 +45,15 @@ public class FXMLmainC implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Op_busqueda.getItems().addAll("Frace","Palabras");
-        
-        Op_busqueda.setOnAction(event ->{
-        if("Frace".equals(Op_busqueda.getSelectionModel().getSelectedItem().toString())){
-            this.modo_b=true;
-        }else if("Palabras".equals(Op_busqueda.getSelectionModel().getSelectedItem().toString())){
-            this.modo_b=false;}});  
-    }    
+         
+    }   
+    
+    @FXML
+    private void change_s_t(ActionEvent event) {
+        if(this.modo_b){serch_tipe.setText("Palabras");
+        }else{serch_tipe.setText("Frace");}
+        this.modo_b = !(this.modo_b);
+    }
     
     @FXML
     private void ltxt(ActionEvent event) {
@@ -63,16 +65,16 @@ public class FXMLmainC implements Initializable {
         
     @FXML
     private void bBb(ActionEvent event) {
-        if(this.modo_b==true){
-        String d = this.t_f.getText();
-        String html_text = __c.send("F@@@"+d);
-        this.__tabs.getTabs().clear();
-        cargaI(html_text);
+        if(this.modo_b){
+            String d = this.t_f.getText();
+            String html_text = __c.send("F@@@"+d);
+            this.__tabs.getTabs().clear();
+            cargaI(html_text);
         }else{
-        String d = this.t_f.getText();
-        String html_text = __c.send("P@@@"+d);
-        this.__tabs.getTabs().clear();
-        cargaI(html_text);
+            String d = this.t_f.getText();
+            String html_text = __c.send("P@@@"+d);
+            this.__tabs.getTabs().clear();
+            cargaI(html_text);
         }
     }
     
@@ -92,5 +94,7 @@ public class FXMLmainC implements Initializable {
             this.__tabs.getTabs().add(__tabNew);
         }
     }
+
+    
 
 }
