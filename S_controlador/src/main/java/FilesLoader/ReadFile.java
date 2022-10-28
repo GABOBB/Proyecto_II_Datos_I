@@ -6,6 +6,8 @@ package FilesLoader;
 
 
 
+import estructuras_de_datos.Lista_D_E_C;
+import estructuras_de_datos.Nodo_D_E_C;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,22 +32,34 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
  */
 public class ReadFile {
 
-    public void readPdf(String files) throws IOException {
-        //Loading an existing document
-      File file = new File(files);
-      PDDocument document =  Loader.loadPDF(file);
-      //Instantiate PDFTextStripper class
-      PDFTextStripper pdfStripper = new PDFTextStripper();
+    public Lista_D_E_C readPdf(String files) throws IOException {
+        Lista_D_E_C list = new Lista_D_E_C();
+       
+        File file = new File(files);
+        PDDocument document =  Loader.loadPDF(file);
 
-      //Retrieving text from PDF document
-      String text = pdfStripper.getText(document);
-      System.out.println(text);
+        PDFTextStripper pdfStripper = new PDFTextStripper();
+        
+        
 
-      //Closing the document
-      document.close();
+        String[] text = pdfStripper.getText(document).split(" ");
+        
+        //System.out.println(text)
+
+        document.close();
+        
+        for(String i : text){
+            Nodo_D_E_C nodo = new Nodo_D_E_C(i);
+            list.add_n_last(nodo);
+            
+        }
+        
+       
+        return list;
     }
     
-    public void readDocx(String files) throws IOException{
+    public Lista_D_E_C readDocx(String files) throws IOException{
+        Lista_D_E_C list = new Lista_D_E_C();
         try {
             FileInputStream fis = new FileInputStream(files);
 
@@ -56,12 +70,13 @@ public class ReadFile {
 
             for(XWPFParagraph paragraph: paragraphList){
 
-               System. out.println(paragraph.getText());
+               
             }
 
         } catch (FileNotFoundException e) {
             
         }
+        return null;
         
     }
 }
