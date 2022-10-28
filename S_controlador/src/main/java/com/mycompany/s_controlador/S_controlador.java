@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author Gabriel
  */
 public class S_controlador {
-    Lista_D_E_C lista=new Lista_D_E_C();
+    Lista_D_E_C lista = new Lista_D_E_C();
     
     public S_controlador(){
         cargar();
@@ -28,7 +28,7 @@ public class S_controlador {
     
     
     public void cargar(){
-        //aqui se llaman a cargar todo lo necesario
+        //aqui se llaman a cargar todo lo necesario  for(){}
         
         
         on_server();

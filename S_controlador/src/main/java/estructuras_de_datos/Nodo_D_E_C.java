@@ -6,6 +6,7 @@ package estructuras_de_datos;
 public class Nodo_D_E_C {
     String id;//es la referencia por la cual se identifica el nodo
     Object data;//es la informacion u objeto que contiene el nodo
+    boolean flag = false;
     Nodo_D_E_C _N;//es el nodo siguiente en la lista
     Nodo_D_E_C _P;//es el nodo anterios en la lista
     
@@ -22,9 +23,17 @@ public class Nodo_D_E_C {
         this._N = null;
         this._P = null;
     }
-
+    
+    public boolean getFlag(){
+        return this.flag;
+    }
+    
+    public void setFlag(boolean f){
+        this.flag = f;
+    }
+    
     public String getId(){//devuelve la referencia (id) del nodo
-        return id;
+        return this.id;
     }
 
     public void setId(String id){//setea la referencia (id) del nodo
