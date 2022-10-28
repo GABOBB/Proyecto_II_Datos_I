@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import FilesLoader.ReadFile;
 
 
 
@@ -55,7 +56,10 @@ public class S_controlador {
 
                 String message = in.readUTF();
                 System.out.println(message);
-                if (message.equals("FILECHOOSER")){out.writeUTF("sincolo@@@<html><head></head><body>hola como estamos</body></html>");
+                if (message.equals("FILECHOOSER")){
+                    ReadFile docx= new ReadFile();
+                    docx.readDocx("Tareaextraclaseresolucion.docx");
+                    out.writeUTF("sincolo@@@<html><head></head><body>hola como estamos</body></html>");
 
                 }else{out.writeUTF("colo**@@@<html><head></head><body>hola<font color = green> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
 
