@@ -65,5 +65,13 @@ public class Lista_D_E_C {
         return null;
     }
     
-     
+    public void delet(Nodo_D_E_C nodo){
+        Nodo_D_E_C p = nodo.get_P();
+        Nodo_D_E_C n = nodo.get_N();
+        p.set_N(n);
+        n.set_P(p);
+        if(nodo==this.head){
+            this.head=n;
+        }
+    }
 }

@@ -9,14 +9,15 @@ package estructuras_de_datos;
  * @author Gabriel
  */
 public class Nodo_AVL {
-    String data; 
+    String __id;
+    Object coincidencias;
     Nodo_AVL left; 
     Nodo_AVL right; 
     
     int height;
     
     public Nodo_AVL(String data) {
-        this.data = data; 
+        this.__id = data; 
         height = 1;
     }
 }

@@ -53,9 +53,9 @@ public class Arbol_AVL {
         if (node == null)
             return (new Nodo_AVL(key));
  
-        if (key.compareTo(node.data) > 0)
+        if (key.compareTo(node.__id) > 0)
             node.left = insert(node.left, key);
-        else if (key.compareTo(node.data) < 0)
+        else if (key.compareTo(node.__id) < 0)
             node.right = insert(node.right, key);
         else 
             return node;
@@ -63,18 +63,18 @@ public class Arbol_AVL {
                               height(node.right));
         int balance = getBalance(node);
 
-        if (balance > 1 && key.compareTo(node.left.data) > 0)
+        if (balance > 1 && key.compareTo(node.left.__id) > 0)
             return rotacionDerecha(node);
  
-        if (balance < -1 && key.compareTo(node.right.data) < 0)
+        if (balance < -1 && key.compareTo(node.right.__id) < 0)
             return rotacionIzquierda(node);
  
-        if (balance > 1 && key.compareTo(node.left.data) < 0) {
+        if (balance > 1 && key.compareTo(node.left.__id) < 0) {
             node.left = rotacionIzquierda(node.left);
             return rotacionDerecha(node);
         }
  
-        if (balance < -1 && key.compareTo(node.right.data) > 0) {
+        if (balance < -1 && key.compareTo(node.right.__id) > 0) {
             node.right = rotacionDerecha(node.right);
             return rotacionIzquierda(node);
         }
@@ -84,7 +84,7 @@ public class Arbol_AVL {
  
     public void preOrder(Nodo_AVL node) {
         if (node != null) {
-            System.out.print(node.data + " ");
+            System.out.print(node.__id + " ");
             preOrder(node.left);
             preOrder(node.right);
         }

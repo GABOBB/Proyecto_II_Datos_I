@@ -35,7 +35,7 @@ public class ArbolBinarioBusqueda {
             this.root = new NodoArbolBinario(id, dato);
             System.out.println("raiz");
         } else {
-            this.add(this.root, dato,id);
+            this.add(this.root, dato, id);
         }
     }
     
