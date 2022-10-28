@@ -2,7 +2,7 @@ package estructuras_de_datos;
 /**
  * @author Gabriel
  */
-public class Lista_D_E_C {
+public class Lista_D_E_C {    
     Nodo_D_E_C head;//refiere a la primera pocision en la lista
     int size;//refiere a la catidad de nodos que tiene la lista
 

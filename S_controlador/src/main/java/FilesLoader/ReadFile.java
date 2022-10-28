@@ -7,20 +7,30 @@ package FilesLoader;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.pdfbox.Loader;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import org.apache.pdfbox.text.PDFTextStripper;
+
+import org.apache.poi.xwpf.usermodel.XWPFDocument; 
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+
+
+
+
 /**
  *
  * @author Admin
  */
-public class ReadPDF {
+public class ReadFile {
 
-    public void read(String files) throws IOException {
+    public void readPdf(String files) throws IOException {
         //Loading an existing document
       File file = new File(files);
       PDDocument document =  Loader.loadPDF(file);
@@ -33,5 +43,25 @@ public class ReadPDF {
 
       //Closing the document
       document.close();
+    }
+    
+    public void readDocx(String files) throws IOException{
+        try {
+            FileInputStream fis = new FileInputStream(files);
+
+            XWPFDocument docx = new XWPFDocument(fis) ;
+            
+            List<XWPFParagraph> paragraphList = docx.getParagraphs();
+
+
+            for(XWPFParagraph paragraph: paragraphList){
+
+               System. out.println(paragraph.getText());
+            }
+
+        } catch (FileNotFoundException e) {
+            
+        }
+        
     }
 }

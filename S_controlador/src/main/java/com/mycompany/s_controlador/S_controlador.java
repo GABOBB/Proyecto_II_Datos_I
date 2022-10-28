@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import FilesLoader.ReadFile;
 
 
 
@@ -16,7 +17,9 @@ import java.util.logging.Logger;
  * @author Gabriel
  */
 public class S_controlador {
-    Lista_D_E_C lista = new Lista_D_E_C();
+    private Lista_D_E_C documentos = new Lista_D_E_C();
+    private Lista_D_E_C avl = new Lista_D_E_C();
+    private Lista_D_E_C bst = new Lista_D_E_C();
     
     public S_controlador(){
         cargar();
@@ -28,9 +31,6 @@ public class S_controlador {
     
     
     public void cargar(){
-        //aqui se llaman a cargar todo lo necesario  for(){}
-        
-        
         on_server();
     }
     public void on_server(){
@@ -55,7 +55,10 @@ public class S_controlador {
 
                 String message = in.readUTF();
                 System.out.println(message);
-                if (message.equals("FILECHOOSER")){out.writeUTF("sincolo@@@<html><head></head><body>hola como estamos</body></html>");
+                if (message.equals("FILECHOOSER")){
+                    ReadFile docx= new ReadFile();
+                    docx.readDocx("Tareaextraclaseresolucion.docx");
+                    out.writeUTF("sincolo@@@<html><head></head><body>hola como estamos</body></html>");
 
                 }else{out.writeUTF("colo**@@@<html><head></head><body>hola<font color = green> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
 
@@ -66,5 +69,32 @@ public class S_controlador {
         } catch (IOException e) {
             Logger.getLogger(S_controlador.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+    
+    private String to_html_fraces(Lista_D_E_C lista){
+        boolean closed = true;
+        Nodo_D_E_C actual = lista.getHead();
+        String html = "<html><head></head><body>";
+        while(actual.get_N()!=lista.getHead()){
+            
+            if(actual.getFlag() && closed){
+                
+                html+="<font color = red>";
+                html+=" "+actual.getId();
+                closed=false;
+                
+            }else if(actual.getFlag() && !closed){
+                html+=" "+actual.getId();
+            }else if (!actual.getFlag() && !closed){
+                html+="</font>";
+                html+=" "+actual.getId();
+                closed=true;
+            }else{
+                html+=" "+actual.getId();
+            }
+            actual = actual.get_N();
+        }
+        html += "</body></html>";
+        return html;
     }
 }
