@@ -10,7 +10,9 @@ public class Lista_D_E_C {
         this.head = null;
         this.size = 0;
     }
-    
+    public Nodo_D_E_C getHead(){
+    return this.head;
+    }
     public void add_n_first(Nodo_D_E_C nodo){//añade un nodo al principio de la lista
         if(this.head!=null){
             this.size++;
