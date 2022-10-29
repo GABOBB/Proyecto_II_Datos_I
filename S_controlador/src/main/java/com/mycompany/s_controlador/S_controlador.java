@@ -71,10 +71,51 @@ public class S_controlador {
         }
     }
     
+    private String to_html_f(){
+        Nodo_D_E_C actual = this.documentos.getHead();
+        String html_final = "";
+        
+        do{
+            String id = actual.getId();
+            Lista_D_E_C documento = (Lista_D_E_C)(actual.getData());
+            
+            boolean closed = true;
+            
+            String html = id+"@@@<html><head></head><body>";
+            Nodo_D_E_C act = documento.getHead();
+            while(act.get_N() != documento.getHead()){
+                if(act.getFlag() && closed){
+                    html += "<font color = red>";
+                    html += " " + actual.getId();
+                    closed = false;
+                }else if(!act.getFlag() && !closed){
+                    html += "</font>";
+                    html += " " + actual.getId();
+                    closed=true;
+                }else if(act.getFlag() && !closed){
+                    html += " " + act.getId();
+                }else{
+                    html += " " + act.getId();
+                }
+                html += "</body></html>";
+                act = act.get_N();
+            }
+            if(actual.get_N() != this.documentos.getHead()){
+                html_final += html + "-_-";
+            }else{
+                html_final += html;
+            }
+            actual = actual.get_N(); 
+            
+        }while(actual != this.documentos.getHead());
+        
+        return html_final;
+    }
+    
     private String to_html_fraces(Lista_D_E_C lista){
         boolean closed = true;
         Nodo_D_E_C actual = lista.getHead();
-        String html = "<html><head></head><body>";
+        String html = "@@@<html><head></head><body>";
         while(actual.get_N()!=lista.getHead()){
             
             if(actual.getFlag() && closed){
