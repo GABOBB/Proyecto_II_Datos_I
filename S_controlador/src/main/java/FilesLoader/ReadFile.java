@@ -34,7 +34,7 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
  */
 public class ReadFile {
 
-    public Lista_D_E_C readPdf(String files) throws IOException {
+    public static Lista_D_E_C readPdf(String files) throws IOException {
         Lista_D_E_C list = new Lista_D_E_C();
        
         File file = new File(files);
@@ -55,7 +55,7 @@ public class ReadFile {
         return list;
     }
     
-    public Lista_D_E_C readDocx(String files) throws IOException{
+    public static Lista_D_E_C readDocx(String files) throws IOException{
        
         Lista_D_E_C list = new Lista_D_E_C();
         
@@ -84,7 +84,7 @@ public class ReadFile {
            
     }
     
-    public Lista_D_E_C readTxt(String __D){
+    public static Lista_D_E_C readTxt(String __D){
         /**
          * se encarga de leer archivos txt
          * parametros: 

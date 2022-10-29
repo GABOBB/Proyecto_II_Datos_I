@@ -1,5 +1,6 @@
 package com.mycompany.s_controlador;
 
+import FilesLoader.FileCopy;
 import estructuras_de_datos.Lista_D_E_C;
 import estructuras_de_datos.Nodo_D_E_C;
 import java.io.DataInputStream;
@@ -21,7 +22,7 @@ public class S_controlador {
     private Lista_D_E_C avl = new Lista_D_E_C();
     private Lista_D_E_C bst = new Lista_D_E_C();
     
-    public S_controlador(){
+    public S_controlador() throws IOException{
         cargar();
     }
 
@@ -30,16 +31,17 @@ public class S_controlador {
     }
     
     
-    public void cargar(){
+    public void cargar() throws IOException{
         on_server();
     }
-    public void on_server(){
+    public void on_server() throws IOException{
         ServerSocket serverSocket = null;
         Socket clientSocket = null;
         DataInputStream in;
         DataOutputStream out;
         final int PORT = 5000;
         final boolean FLAG = true;
+        
 
 
         try {
@@ -60,9 +62,15 @@ public class S_controlador {
                     docx.readDocx("Tareaextraclaseresolucion.docx");
                     out.writeUTF("sincolo@@@<html><head></head><body>hola como estamos</body></html>");
 
-                }else{out.writeUTF("colo**@@@<html><head></head><body>hola<font color = green> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
-
+                } else if (message.contains("PATH")){
+                    System.out.println("Detects");
+                    String m = message.substring(0, message.length() - 4);
+                    System.out.println(m);
+                    FileCopy.FileLoader(m);
+                } else{out.writeUTF("colo**@@@<html><head></head><body>hola<font color = green> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
+                    
                 }
+                
                 clientSocket.close();
                 System.out.println("client disconnected[1]");
             }

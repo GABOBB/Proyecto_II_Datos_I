@@ -24,6 +24,8 @@ import javafx.scene.web.HTMLEditor;
 public class FXMLmainC implements Initializable {
     C_interface __c = new C_interface();
     boolean modo_b;
+    @FXML
+    private Button AddFile;
     
     @FXML
     private Button LoadTxt;
@@ -61,6 +63,12 @@ public class FXMLmainC implements Initializable {
         String html = this.__c.send(d);
         this.__tabs.getTabs().clear();
         cargaI(html);
+    }
+    
+    @FXML
+    void AddNewFile(ActionEvent event) throws IOException {
+        String d = FileSearcher.FindFile();
+        this.__c.send(d + "PATH");
     }
         
     @FXML
