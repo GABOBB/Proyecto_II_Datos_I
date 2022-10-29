@@ -8,9 +8,11 @@ package FilesLoader;
 
 import estructuras_de_datos.Lista_D_E_C;
 import estructuras_de_datos.Nodo_D_E_C;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,7 +30,7 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
 /**
  *
- * @author Admin
+ * @author Michael/Gabriel
  */
 public class ReadFile {
 
@@ -40,8 +42,6 @@ public class ReadFile {
 
         PDFTextStripper pdfStripper = new PDFTextStripper();
         
-        
-
         String[] text = pdfStripper.getText(document).split(" ");
         
         //System.out.println(text)
@@ -50,33 +50,63 @@ public class ReadFile {
         
         for(String i : text){
             Nodo_D_E_C nodo = new Nodo_D_E_C(i);
-            list.add_n_last(nodo);
-            
+            list.add_n_last(nodo);  
         }
-        
-       
         return list;
     }
     
     public Lista_D_E_C readDocx(String files) throws IOException{
+       
         Lista_D_E_C list = new Lista_D_E_C();
+        
         try {
             FileInputStream fis = new FileInputStream(files);
 
             XWPFDocument docx = new XWPFDocument(fis) ;
             
             List<XWPFParagraph> paragraphList = docx.getParagraphs();
-
-
-            for(XWPFParagraph paragraph: paragraphList){
-
-               
-            }
-
-        } catch (FileNotFoundException e) {
             
+            for(XWPFParagraph paragraph: paragraphList){
+                String[] temp = (paragraph.toString()).split(" ");
+                for(String i : temp){
+                    Nodo_D_E_C nodo = new Nodo_D_E_C(i);
+                    list.add_n_last(nodo);    
+                }    
+            }
+            
+            return list;
+            
+        } catch (FileNotFoundException e) {
+            System.err.println(e);
+            return null;
         }
-        return null;
         
+           
+    }
+    
+    public Lista_D_E_C readTxt(String __D){
+        /**
+         * se encarga de leer archivos txt
+         * parametros: 
+         * -string __D (la direccion del archivo)
+         */
+        String text = "";
+        try{
+            BufferedReader bf = new BufferedReader(new FileReader(__D));
+            String bfRead;
+            while((bfRead = bf.readLine())!=null){
+                text += bfRead;
+            }
+            String[] text_aux = text.split(" ");
+            Lista_D_E_C lista = new Lista_D_E_C();
+            for(String i : text_aux){
+                Nodo_D_E_C nodo = new Nodo_D_E_C(i);
+                lista.add_n_first(nodo);
+            }
+            return lista;
+        }catch(IOException e){
+            System.err.println(e);
+            return null;
+        }
     }
 }
