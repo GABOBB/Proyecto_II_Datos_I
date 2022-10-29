@@ -1,6 +1,7 @@
 package com.mycompany.s_controlador;
 
 import FilesLoader.FileCopy;
+import FilesLoader.FilesReader;
 import estructuras_de_datos.Lista_D_E_C;
 import estructuras_de_datos.Nodo_D_E_C;
 import java.io.DataInputStream;
@@ -58,10 +59,8 @@ public class S_controlador {
                 String message = in.readUTF();
                 System.out.println(message);
                 if (message.equals("FILECHOOSER")){
-                    ReadFile docx= new ReadFile();
-                    docx.readDocx("Tareaextraclaseresolucion.docx");
-                    out.writeUTF("sincolo@@@<html><head></head><body>hola como estamos</body></html>");
-
+                    this.documentos = FilesReader.readFiles();
+                    to_html_f();
                 } else if (message.contains("PATH")){
                     System.out.println("Detects");
                     String m = message.substring(0, message.length() - 4);

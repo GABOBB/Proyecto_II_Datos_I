@@ -4,6 +4,7 @@
  */
 package FilesLoader;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -39,6 +40,14 @@ public class FileCopy {
     public static void FileLoader(String Path) throws IOException, NullPointerException {
         System.out.println("FUNCIONA");
         File selectedFile = new File(Path);
+        
+        File LoadedFiles = new File("Biblioteca/ExistingFiles.txt");
+        FileWriter LoadedFilesWriter = new FileWriter(LoadedFiles, true);
+        BufferedWriter FileBw = new BufferedWriter(LoadedFilesWriter);
+        FileBw.write(selectedFile.getName());
+        FileBw.newLine();
+        FileBw.close();
+        
         File UserFile = new File("Biblioteca/" + selectedFile.getName());
         System.out.println(selectedFile.getName());
         FileWriter file = new FileWriter("Biblioteca/" + selectedFile.getName(), true);

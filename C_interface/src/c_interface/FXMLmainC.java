@@ -61,8 +61,6 @@ public class FXMLmainC implements Initializable {
     private void ltxt(ActionEvent event) {
         String d = "FILECHOOSER";
         String html = this.__c.send(d);
-        this.__tabs.getTabs().clear();
-        cargaI(html);
     }
     
     @FXML
