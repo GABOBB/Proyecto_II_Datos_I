@@ -112,7 +112,7 @@ public class S_controlador {
         return html_final;
     }
     
-    private String to_html_fraces(Lista_D_E_C lista){
+    /*private String to_html_fraces(Lista_D_E_C lista){
         boolean closed = true;
         Nodo_D_E_C actual = lista.getHead();
         String html = "@@@<html><head></head><body>";
@@ -137,5 +137,19 @@ public class S_controlador {
         }
         html += "</body></html>";
         return html;
+    }*/ 
+    
+    public void limpia_bandera(){
+        Nodo_D_E_C act_d = this.documentos.getHead();
+        do{
+            Lista_D_E_C l_p = (Lista_D_E_C) act_d.getData();
+            Nodo_D_E_C act_p = (Nodo_D_E_C) l_p.getHead();
+            do{
+                if(act_p.getFlag()){act_p.setFlag(false);}
+                act_p = act_p.get_N();
+            }while(act_p != l_p.getHead());
+            act_d = act_d.get_N();
+        }while(act_d != this.documentos.getHead());
+    
     }
 }
