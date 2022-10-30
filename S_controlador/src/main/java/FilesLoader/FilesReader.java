@@ -21,9 +21,8 @@ import java.io.IOException;
 public class FilesReader {
     public static Lista_D_E_C readFiles() throws FileNotFoundException, IOException{
         Lista_D_E_C returnable = new Lista_D_E_C();
-        Lista_D_E_C documents = new Lista_D_E_C();
+        Lista_D_E_C documents = FileToListByLines.leer_lineas("Biblioteca/ExistingFiles.txt");
         Lista_D_E_C words = new Lista_D_E_C();
-        documents = FileToListByLines.leer_lineas("Biblioteca/ExistingFiles.txt");
         //System.out.println(documents.getHead());
         Nodo_D_E_C actual = documents.getHead();
         do{
@@ -37,12 +36,15 @@ public class FilesReader {
             if(lastPart.equals("pdf")){
                 words = readPdf("Biblioteca/" + actual.getId());
                 Nodo_D_E_C nodo = new Nodo_D_E_C(actual.getId(), words);
+                returnable.add_n_last(nodo);
             } else if (lastPart.equals("docx")){
                 words = readDocx("Biblioteca/" + actual.getId());
                 Nodo_D_E_C nodo = new Nodo_D_E_C(actual.getId(), words);
+                returnable.add_n_last(nodo);
             } else if (lastPart.equals("txt")){
                 words = readTxt("Biblioteca/" + actual.getId());
                 Nodo_D_E_C nodo = new Nodo_D_E_C(actual.getId(), words);
+                returnable.add_n_last(nodo);
             }
             
             actual = actual.get_N();

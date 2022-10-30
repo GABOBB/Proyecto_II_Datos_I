@@ -60,13 +60,15 @@ public class S_controlador {
                 System.out.println(message);
                 if (message.equals("FILECHOOSER")){
                     this.documentos = FilesReader.readFiles();
-                    to_html_f();
+                    String x = to_html_f();
+                    out.writeUTF(x);
                 } else if (message.contains("PATH")){
                     System.out.println("Detects");
                     String m = message.substring(0, message.length() - 4);
                     System.out.println(m);
                     FileCopy.FileLoader(m);
-                } else{out.writeUTF("colo**@@@<html><head></head><body>hola<font color = green> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
+                } else{
+                    out.writeUTF("colo**@@@<html><head></head><body>hola<font color = red> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
                     
                 }
                 

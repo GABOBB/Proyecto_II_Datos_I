@@ -22,6 +22,7 @@ public class Nodo_D_E_C {
         this.data = null;
         this._N = null;
         this._P = null;
+        System.out.println(id+"nodo_D_E_C");
     }
     
     public boolean getFlag(){
