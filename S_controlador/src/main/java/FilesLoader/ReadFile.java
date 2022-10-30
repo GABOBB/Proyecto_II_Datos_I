@@ -92,13 +92,13 @@ public class ReadFile {
             BufferedReader bf = new BufferedReader(new FileReader(__D));
             String bfRead;
             while((bfRead = bf.readLine())!=null){
-                text += bfRead;
+                text += bfRead +" ";
             }
             String[] text_aux = text.split(" ");
             Lista_D_E_C lista = new Lista_D_E_C();
             for(String i : text_aux){
                 Nodo_D_E_C nodo = new Nodo_D_E_C(i);
-                lista.add_n_first(nodo);
+                lista.add_n_last(nodo);
             }
             return lista;
         }catch(IOException e){

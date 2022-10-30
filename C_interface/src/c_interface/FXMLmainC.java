@@ -2,6 +2,7 @@ package c_interface;
 
 import auxiliares.Lista_D_E_C;
 import auxiliares.Nodo_D_E_C;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +23,8 @@ import javafx.scene.web.HTMLEditor;
  * @author Gabriel
  */
 public class FXMLmainC implements Initializable {
+    
+    
     C_interface __c = new C_interface();
     boolean modo_b;
     @FXML
@@ -98,6 +101,18 @@ public class FXMLmainC implements Initializable {
     @FXML
     void OrdenamientoArchivos(ActionEvent event) {
         this.__c.send(Ordenamiento.getSelectionModel().getSelectedItem());
+    }
+    
+    @FXML
+    void abrir(ActionEvent event) {
+       
+       Tab i = __tabs.getSelectionModel().getSelectedItem();
+       String nombre=i.getText();
+       System.out.println(nombre);
+       this.__c.send("ruta@" +nombre);
+     
+     
+            
     }
     
    

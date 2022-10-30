@@ -16,7 +16,8 @@ public class AbrirArchivos {
         
         ProcessBuilder p = new ProcessBuilder();
 
-        p.command("cmd.exe", "/c", id);
+        p.command("cmd.exe", "/c", "Biblioteca\\" + id );
+        System.out.println("si funciona arturo se la chupa a marco");
         
         p.start();
 

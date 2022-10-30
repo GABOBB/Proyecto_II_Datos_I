@@ -1,5 +1,6 @@
 package com.mycompany.s_controlador;
 
+import FilesLoader.AbrirArchivos;
 import FilesLoader.FileCopy;
 import FilesLoader.FilesReader;
 import estructuras_de_datos.Lista_D_E_C;
@@ -117,19 +118,32 @@ public class S_controlador {
                     
                 }catch(Exception e){
                     if (message.equals("FILECHOOSER")){
-                        String x = to_html_f();
-                        out.writeUTF(x);
+                        //String x = to_html_f();
+                        //out.writeUTF(x);
+                        
                     } else if (message.contains("PATH")){
                         System.out.println("Detects");
                         String m = message.substring(0, message.length() - 4);
                         System.out.println(m);
+                        
                         FileCopy.FileLoader(m);
                     } else if (message.equals("Nombre")){
                         System.out.println("Se ordena por el nombre");
+                        
                     } else if (message.equals("Creacion")){
                         System.out.println("Se ordena por creacion");
                     } else if (message.equals("Palabras")){
                         System.out.println("Se ordena por cantidad de palabras");
+                    } else if (message.contains("ruta@")){
+                        String[] s = message.split("@");
+                        System.out.println(s[1]);
+                        
+                        AbrirArchivos.abrir(s[1]);
+                        
+                        
+                        
+                               
+                        
                     } else{
                         String x = to_html_f();
                         out.writeUTF(x);
