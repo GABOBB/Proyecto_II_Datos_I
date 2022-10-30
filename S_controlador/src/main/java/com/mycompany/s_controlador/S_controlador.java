@@ -33,6 +33,7 @@ public class S_controlador {
     
     
     public void cargar() throws IOException{
+        this.documentos = FilesReader.readFiles();
         on_server();
     }
     public void on_server() throws IOException{
@@ -59,7 +60,6 @@ public class S_controlador {
                 String message = in.readUTF();
                 System.out.println(message);
                 if (message.equals("FILECHOOSER")){
-                    this.documentos = FilesReader.readFiles();
                     String x = to_html_f();
                     out.writeUTF(x);
                 } else if (message.contains("PATH")){
@@ -68,7 +68,8 @@ public class S_controlador {
                     System.out.println(m);
                     FileCopy.FileLoader(m);
                 } else{
-                    out.writeUTF("colo**@@@<html><head></head><body>hola<font color = red> como es</font>tamos</body></html>-_-sincolo@@@<html><head></head><body>hola como estamos</body></html>");
+                    String x = to_html_f();
+                    out.writeUTF(x);
                     
                 }
                 

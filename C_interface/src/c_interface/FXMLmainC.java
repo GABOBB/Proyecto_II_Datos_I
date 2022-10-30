@@ -26,9 +26,6 @@ public class FXMLmainC implements Initializable {
     boolean modo_b;
     @FXML
     private Button AddFile;
-    
-    @FXML
-    private Button LoadTxt;
     @FXML
     private Button intento_B;
     @FXML
@@ -55,15 +52,6 @@ public class FXMLmainC implements Initializable {
         if(this.modo_b){serch_tipe.setText("Palabras");
         }else{serch_tipe.setText("Frace");}
         this.modo_b = !(this.modo_b);
-    }
-    
-    @FXML
-    private void ltxt(ActionEvent event) {
-        String d = "FILECHOOSER";
-        String html = this.__c.send(d);
-        this.__tabs.getTabs().clear();
-        String x = html;
-        cargaI(x);
     }
     
     @FXML
