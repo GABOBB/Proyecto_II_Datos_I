@@ -11,23 +11,52 @@ public class ArbolBinarioBusqueda {
         root = null;
     }
     
+    public NodoArbolBinario exist(String search){
+        return exist(this.root,search);
+    }
     
-    public boolean exist(String search) {
-        return exist(this.root, search);
+    private NodoArbolBinario exist(NodoArbolBinario root,String search){
+        if(root == null){
+            return null;
+        }
+        if(root.getId().equals(search)){
+        
+            return root;
+        }else if(root.getId().compareTo(search)<0){
+        
+            return exist(root.LeftSon,search);
+            
+        }else if(root.getId().compareTo(search)>0){
+            
+            return exist(root.RigthSon,search);
+            
+        } 
+        return null;
+    }
+    
+    public Lista_D_E_C buscar(String search) {
+        return buscar(this.root, search);
     }
 
-    private boolean exist(NodoArbolBinario root, String search) {
+    private Lista_D_E_C buscar(NodoArbolBinario root, String search) {
+        Lista_D_E_C lista_1 = new Lista_D_E_C();
+    
         if (root == null) {
-            return false;
-        }
-        if (root.getId().equals(search)) {
-            return true;
+            return lista_1;
+            
         } else if (search.compareTo(root.getId()) > 0) {
-            return exist(root.getLeftSon(), search);
-        } else {
-            return exist(root.getRigtSon(), search);
+            if (root.getId().contains(search)) {
+                Nodo_D_E_C nodo = new Nodo_D_E_C(root.getId(),root.data);
+                lista_1.add_n_last(nodo);
+            } 
+            return buscar(root.RigthSon,search);
+        }else {
+            if (root.getId().contains(search)) {
+                Nodo_D_E_C nodo = new Nodo_D_E_C(root.getId(),root.data);
+                lista_1.add_n_last(nodo);
+            }
+            return buscar(root.LeftSon,search);
         }
-
     }
 
     public void add(String id,Object dato) {

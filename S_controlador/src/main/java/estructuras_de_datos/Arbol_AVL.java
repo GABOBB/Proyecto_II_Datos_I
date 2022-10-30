@@ -18,6 +18,38 @@ public class Arbol_AVL {
         return (a > b) ? a : b;
     }
     
+    public Lista_D_E_C exist(String search){
+        return exist(this.root, search);
+    }
+    
+    private Lista_D_E_C exist(Nodo_AVL root, String search){
+        Lista_D_E_C lis1 = new Lista_D_E_C();
+        
+        if(root == null){
+            return lis1;
+            
+        } else if (search.compareTo(root.getId()) > 0) {
+            
+            if (root.getId().contains(search)){
+            Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
+            lis1.add_n_last(nodo); 
+            }
+            
+            return exist(root.right, search);
+            
+        } else if (search.compareTo(root.getId()) < 0) {
+            
+            if (root.getId().contains(search)){
+            Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
+            lis1.add_n_last(nodo);
+            }
+            
+            return exist(root.left, search);
+            
+        }
+        return null;
+    }
+    
    public Nodo_AVL rotacionDerecha(Nodo_AVL y){
        Nodo_AVL x = y.left;
        Nodo_AVL T2 = x.right;
