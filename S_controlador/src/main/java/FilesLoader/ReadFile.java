@@ -21,6 +21,7 @@ import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument; 
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -63,15 +64,11 @@ public class ReadFile {
             FileInputStream fis = new FileInputStream(files);
 
             XWPFDocument docx = new XWPFDocument(fis) ;
-            
-            List<XWPFParagraph> paragraphList = docx.getParagraphs();
-            
-            for(XWPFParagraph paragraph: paragraphList){
-                String[] temp = (paragraph.toString()).split(" ");
-                for(String i : temp){
-                    Nodo_D_E_C nodo = new Nodo_D_E_C(i);
-                    list.add_n_last(nodo);    
-                }    
+            XWPFWordExtractor text_W = new XWPFWordExtractor(docx);
+            String[] text = text_W.getText().split(" ");
+            for(String i : text){
+                Nodo_D_E_C nodo = new Nodo_D_E_C(i);
+                list.add_n_last(nodo);
             }
             
             return list;
