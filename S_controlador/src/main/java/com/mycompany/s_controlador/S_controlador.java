@@ -124,6 +124,12 @@ public class S_controlador {
                         String m = message.substring(0, message.length() - 4);
                         System.out.println(m);
                         FileCopy.FileLoader(m);
+                    } else if (message.equals("Nombre")){
+                        System.out.println("Se ordena por el nombre");
+                    } else if (message.equals("Creacion")){
+                        System.out.println("Se ordena por creacion");
+                    } else if (message.equals("Palabras")){
+                        System.out.println("Se ordena por cantidad de palabras");
                     } else{
                         String x = to_html_f();
                         out.writeUTF(x);

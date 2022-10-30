@@ -12,6 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 
@@ -20,6 +22,8 @@ import java.io.OutputStream;
  * @author RYZEN
  */
 public class FileCopy {
+    static LocalTime localTime;
+    static LocalDate localDate;
     public static void copyFileUsingStream(File source, File dest) throws IOException {
         InputStream is = null;
         OutputStream os = null;
@@ -39,13 +43,30 @@ public class FileCopy {
 
     public static void FileLoader(String Path) throws IOException, NullPointerException {
         System.out.println("FUNCIONA");
+        localTime = LocalTime.now();
+        localDate = LocalDate.now();
+        
         File selectedFile = new File(Path);
         
         File LoadedFiles = new File("Biblioteca/ExistingFiles.txt");
+        File TimeFiles = new File("Biblioteca/TimeFiles.txt");
         FileWriter LoadedFilesWriter = new FileWriter(LoadedFiles, true);
+        FileWriter LoadedTimeWriter = new FileWriter(TimeFiles, true);
+        
         BufferedWriter FileBw = new BufferedWriter(LoadedFilesWriter);
+        BufferedWriter TimeBw = new BufferedWriter(LoadedTimeWriter);
+        
+        String time;
+        time = String.valueOf(localTime);
+        String parts = time.substring(0, 8);
+        
+        
         FileBw.write(selectedFile.getName());
+        TimeBw.write(selectedFile.getName() + "@1729@" + parts + "@1729@" + String.valueOf(localDate));
+        
         FileBw.newLine();
+        TimeBw.newLine();
+        TimeBw.close();
         FileBw.close();
         
         File UserFile = new File("Biblioteca/" + selectedFile.getName());

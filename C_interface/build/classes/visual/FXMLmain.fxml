@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="714.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c_interface.FXMLmainC">
+<AnchorPane id="AnchorPane" prefHeight="714.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c_interface.FXMLmainC">
    <children>
       <Button fx:id="intento_B" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#bBb" text="Buscar" />
       <TextField fx:id="t_f" layoutX="89.0" layoutY="14.0" onAction="#bBb" />
       <TabPane fx:id="__tabs" layoutX="3.0" layoutY="52.0" prefHeight="641.0" prefWidth="840.0" tabClosingPolicy="UNAVAILABLE" />
       <Button fx:id="serch_tipe" layoutX="261.0" layoutY="14.0" mnemonicParsing="false" onAction="#change_s_t" text="Palabras" />
       <Button fx:id="AddFile" layoutX="708.0" layoutY="14.0" mnemonicParsing="false" onAction="#AddNewFile" prefHeight="25.0" prefWidth="127.0" text="Agregar a Biblioteca" />
+      <ComboBox prefWidth="150.0" />
+      <ComboBox fx:id="Ordenamiento" layoutX="543.0" layoutY="14.0" onAction="#OrdenamientoArchivos" prefWidth="150.0" promptText="Ordenamiento" />
    </children>
 </AnchorPane>

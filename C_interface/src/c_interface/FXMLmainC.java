@@ -35,6 +35,8 @@ public class FXMLmainC implements Initializable {
     @FXML
     private Button serch_tipe;
     
+    @FXML
+    private ComboBox<String> Ordenamiento;
 
 
     /**
@@ -44,7 +46,9 @@ public class FXMLmainC implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         
+         Ordenamiento.getItems().add("Nombre");
+         Ordenamiento.getItems().add("Creacion");
+         Ordenamiento.getItems().add("Palabras");
     }   
     
     @FXML
@@ -91,7 +95,12 @@ public class FXMLmainC implements Initializable {
             this.__tabs.getTabs().add(__tabNew);
         }
     }
-
+    @FXML
+    void OrdenamientoArchivos(ActionEvent event) {
+        this.__c.send(Ordenamiento.getSelectionModel().getSelectedItem());
+    }
+    
+   
     
 
 }
