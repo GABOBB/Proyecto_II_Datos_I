@@ -3,6 +3,7 @@ package com.mycompany.s_controlador;
 import FilesLoader.AbrirArchivos;
 import FilesLoader.FileCopy;
 import FilesLoader.FilesReader;
+import FilesLoader.OrderFiles;
 import estructuras_de_datos.Lista_D_E_C;
 import estructuras_de_datos.Nodo_D_E_C;
 import java.io.DataInputStream;
@@ -129,21 +130,18 @@ public class S_controlador {
                         FileCopy.FileLoader(m);
                     } else if (message.equals("Nombre")){
                         System.out.println("Se ordena por el nombre");
-                        
+                        OrderFiles.OrderByNames();
                     } else if (message.equals("Creacion")){
                         System.out.println("Se ordena por creacion");
+                        OrderFiles.OrderByDate();
                     } else if (message.equals("Palabras")){
                         System.out.println("Se ordena por cantidad de palabras");
+                        OrderFiles.OrderByLength();
                     } else if (message.contains("ruta@")){
                         String[] s = message.split("@");
                         System.out.println(s[1]);
                         
                         AbrirArchivos.abrir(s[1]);
-                        
-                        
-                        
-                               
-                        
                     } else{
                         String x = to_html_f();
                         out.writeUTF(x);
@@ -200,33 +198,7 @@ public class S_controlador {
         return html_final;
     }
     
-    /*private String to_html_fraces(Lista_D_E_C lista){
-        boolean closed = true;
-        Nodo_D_E_C actual = lista.getHead();
-        String html = "@@@<html><head></head><body>";
-        while(actual.get_N()!=lista.getHead()){
-            
-            if(actual.getFlag() && closed){
-                
-                html+="<font color = red>";
-                html+=" "+actual.getId();
-                closed=false;
-                
-            }else if(actual.getFlag() && !closed){
-                html+=" "+actual.getId();
-            }else if (!actual.getFlag() && !closed){
-                html+="</font>";
-                html+=" "+actual.getId();
-                closed=true;
-            }else{
-                html+=" "+actual.getId();
-            }
-            actual = actual.get_N();
-        }
-        html += "</body></html>";
-        return html;
-    }*/ 
-    
+
     public void limpia_bandera(){
         Nodo_D_E_C act_d = this.documentos.getHead();
         do{

@@ -62,7 +62,7 @@ public class FileCopy {
         
         
         FileBw.write(selectedFile.getName());
-        TimeBw.write(selectedFile.getName() + "@1729@" + parts + "@1729@" + String.valueOf(localDate));
+        TimeBw.write(selectedFile.getName() + "@1729@" + parts + "@1729@" + String.valueOf(localDate) + "@1729@");
         
         FileBw.newLine();
         TimeBw.newLine();

@@ -4,7 +4,7 @@ package estructuras_de_datos;
  */
 public class Lista_D_E_C {    
     Nodo_D_E_C head;//refiere a la primera pocision en la lista
-    int size;//refiere a la catidad de nodos que tiene la lista
+    public int size;//refiere a la catidad de nodos que tiene la lista
 
     public Lista_D_E_C(){//inicializa una lista con valores nulos
         this.head = null;
@@ -60,10 +60,10 @@ public class Lista_D_E_C {
     public Nodo_D_E_C Buscar(String id){
         Nodo_D_E_C a = this.head;
         if(a==null){return null;}
-        while(a.get_N()!=this.head){
-            if(id == a.getId()){return a;}
+        do {
+            if(id.equals(a.getId())){return a;}
             a = a.get_N();
-        }
+        } while(a != this.head);
         return null;
     }
     

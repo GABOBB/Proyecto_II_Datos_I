@@ -13,7 +13,7 @@ package AlgoritmosOrdenamiento;
 import java.io.*;
 import java.util.*;
  
-class Radix {
+public class Radix {
  
     private static int getMax(int arr[], int n)
     {
