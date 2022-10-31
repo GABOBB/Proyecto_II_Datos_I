@@ -48,23 +48,18 @@ public class S_controlador {
         do {
             Arbol_B arbolBinario = new Arbol_B();
             Lista_D_E_C palabras = (Lista_D_E_C) __act.getData();
-            
             Nodo_D_E_C palabra = palabras.getHead();
             
             
             do {
-                System.out.println(palabra.getId() + " ACTUAL");
-                cargar_a_bst(palabra.getId(), palabra ,arbolBinario);
+                //System.out.println(palabra.getId() + " ACTUAL");
+                cargar_a_bst(palabra.getId(),arbolBinario);
                 palabra = palabra.get_N();
             } while (palabra != palabras.getHead());
-            
-           
-            
             Nodo_D_E_C nodo = new Nodo_D_E_C(__act.getId(), arbolBinario);
             System.out.println(nodo.getId() + "NODO QUE SE METE EN EL ARBOL");
             this.__bst.add_n_last(nodo);
             __act = __act.get_N();
-            
             System.out.println(__act.getId() + "ARCHIVO DE ARCHIVOS");
             
         } while (__act != this.documentos.getHead());
@@ -89,10 +84,10 @@ public class S_controlador {
     
     
     
-    private int cargar_a_bst(String id,Nodo_D_E_C nodo, Arbol_B arbolBinario){
-        Nodo_D_E_C NodoPalabra = new Nodo_D_E_C(id, nodo);
-        
+    private void cargar_a_bst(String id, Arbol_B arbolBinario){
+        Nodo_D_E_C NodoPalabra = new Nodo_D_E_C(id);
         Nodo_B nodoEncontrado = arbolBinario.buscarNodo(NodoPalabra.getId());
+        
         if(nodoEncontrado == null){
             Lista_D_E_C lista = new Lista_D_E_C();
             lista.add_n_last(NodoPalabra);
@@ -102,7 +97,6 @@ public class S_controlador {
             Lista_D_E_C ListaEncontrada = (Lista_D_E_C) nodoEncontrado.getData();
             ListaEncontrada.add_n_last(NodoPalabra);
         }
-        return 1;
     }
     
     private void on_server() throws IOException{
@@ -140,10 +134,11 @@ public class S_controlador {
                         do{
                             //Arbol_AVL t_avl = (Arbol_AVL) n_avl.getData();
                             Arbol_B t_bst = (Arbol_B) n_bst.getData();
-                            //System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
+                            System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
                             //t_bst.imprimirNodosDerechos();
- 
-                            //t_bst.buscarNodo("fortuna");
+                            //System.out.println(t_bst.buscarNodoContenido("Proyecto"));
+                            System.out.println(t_bst.getRoot().getId() + "ID");
+                            //t_bst.buscarNodo("Proyecto");
                             
                             //for(String i : palabras){    
                             //    t_bst.buscarNodo(i);
@@ -153,7 +148,7 @@ public class S_controlador {
                             //n_avl = n_avl.get_N();
                             
                             
-                            n_bst = n_bst.get_N();
+                            //n_bst = n_bst.get_N();
                         }while(n_bst!=this.__bst.getHead());
                         String x = to_html_f();
                         out.writeUTF(x);

@@ -8,7 +8,6 @@ estructuras_de_datos\Arbol_AVL.class
 AlgoritmosOrdenamiento\Radix.class
 com\mycompany\s_controlador\S_controlador.class
 FilesLoader\ReadFile.class
-estructuras_de_datos\Arbol_B.class
 estructuras_de_datos\ArbolBinarioBusqueda.class
 estructuras_de_datos\NodoArbolBinario.class
 FilesLoader\FilesReader.class
