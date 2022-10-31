@@ -126,17 +126,22 @@ public class S_controlador {
                         System.out.println("Detects");
                         String m = message.substring(0, message.length() - 4);
                         System.out.println(m);
-                        
                         FileCopy.FileLoader(m);
                     } else if (message.equals("Nombre")){
                         System.out.println("Se ordena por el nombre");
-                        OrderFiles.OrderByNames();
+                        this.documentos = OrderFiles.OrderByNames();
+                        String x = to_html_f();
+                        out.writeUTF(x);
                     } else if (message.equals("Creacion")){
                         System.out.println("Se ordena por creacion");
-                        OrderFiles.OrderByDate();
+                        this.documentos = OrderFiles.OrderByDate();
+                        String x = to_html_f();
+                        out.writeUTF(x);
                     } else if (message.equals("Palabras")){
                         System.out.println("Se ordena por cantidad de palabras");
-                        OrderFiles.OrderByLength();
+                        this.documentos = OrderFiles.OrderByLength();
+                        String x = to_html_f();
+                        out.writeUTF(x);
                     } else if (message.contains("ruta@")){
                         String[] s = message.split("@");
                         System.out.println(s[1]);

@@ -100,7 +100,9 @@ public class FXMLmainC implements Initializable {
     }
     @FXML
     void OrdenamientoArchivos(ActionEvent event) {
-        this.__c.send(Ordenamiento.getSelectionModel().getSelectedItem());
+        String x = this.__c.send(Ordenamiento.getSelectionModel().getSelectedItem());
+        this.__tabs.getTabs().clear();
+        cargaI(x);
     }
     
     @FXML

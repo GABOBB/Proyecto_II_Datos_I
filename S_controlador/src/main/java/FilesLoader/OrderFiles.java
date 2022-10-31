@@ -12,6 +12,7 @@ import estructuras_de_datos.Lista_D_E_C;
 import estructuras_de_datos.Nodo_D_E_C;
 import java.io.BufferedWriter;
 import java.io.File;
+import FilesLoader.FilesReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,7 +23,12 @@ import java.nio.file.Path;
  * @author RYZEN
  */
 public class OrderFiles {
-    public static void OrderByNames() throws IOException{
+    private static Lista_D_E_C LoadBigList() throws IOException{
+        Lista_D_E_C BigList = new Lista_D_E_C();
+        BigList = FilesReader.readFiles();
+        return BigList; 
+    }
+    public static Lista_D_E_C OrderByNames() throws IOException{
         //Lista_D_E_C BigList = new Lista_D_E_C();
         //BigList = FilesReader.readFiles();
         
@@ -73,8 +79,10 @@ public class OrderFiles {
             }
         }
         TimeBw.close(); 
+        return LoadBigList();
+        
     }
-    public static void OrderByDate() throws IOException {
+    public static Lista_D_E_C OrderByDate() throws IOException {
         Path fileName = Path.of("Biblioteca/ExistingFiles.txt");
         String str = Files.readString(fileName);
         
@@ -158,9 +166,10 @@ public class OrderFiles {
         }
         TimeBw.close();
         DocumentsBw.close();
+        return LoadBigList();
         
     }
-    public static void OrderByLength() throws IOException {
+    public static Lista_D_E_C OrderByLength() throws IOException {
         Lista_D_E_C BigList = new Lista_D_E_C();
         Lista_D_E_C LocalList = new Lista_D_E_C();
         BigList = FilesReader.readFiles();
@@ -251,7 +260,7 @@ public class OrderFiles {
         }
         DocumentsBw.close();
         TimeBw.close();
-        
+        return LoadBigList();
         
     }
 
