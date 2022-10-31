@@ -10,6 +10,7 @@ package estructuras_de_datos;
  */
 public class Arbol_B {
     private Nodo_B root;
+    private int size;
     private int Depth;
     private String id;
     
@@ -21,21 +22,14 @@ public class Arbol_B {
     
     private Nodo_B addNodo(Nodo_B _a, Nodo_B padre){
         if (padre == null){
+            this.size++;
             return root = _a;
         } else if(_a.getId().compareTo(padre.getId()) > 0){
-            if (padre.getHDer() == null){
-                padre.setHDer(_a);
-            } else {
                 return addNodo(_a, padre.getHDer());
-            }
         } else if(_a.getId().compareTo(padre.getId()) < 0){
-            if (padre.getHIzq() == null){
-                padre.setHIzq(_a);
-            } else {
                 return addNodo(_a, padre.getHIzq());
-            }
         }
-        return _a;
+        return padre;
     }
     
     public Nodo_B buscarNodo(String _a){
@@ -45,10 +39,42 @@ public class Arbol_B {
         if (padre == null || _a.equals(padre.getId())){
             return padre;
         } else if(_a.compareTo(padre.getId()) > 0){
+            System.out.println(padre.getHDer().getId() + " Hijo derecho");
+            return buscarNodo(_a, padre.getHDer());
+        } else {
+            System.out.println(padre.getHIzq().getId() + " Hijo Izquierdo");
+            return buscarNodo(_a, padre.getHIzq());
+        }
+    }
+    
+    public Nodo_B buscarNodoContenido(String _a){
+        return buscarNodoContenido(_a, this.root);
+    }
+    
+    private Nodo_B buscarNodoContenido(String _a, Nodo_B padre){
+        if ((padre.getId()).contains(_a) || padre == null){
+            return padre;
+        } else if(_a.compareTo(padre.getId()) > 0){
             return buscarNodo(_a, padre.getHDer());
         } else {
             return buscarNodo(_a, padre.getHIzq());
         }
     }
+    
+    public void imprimirNodosDerechos(){
+        imprimirNodosDerechos(this.root);
+    }
+    
+    private void imprimirNodosDerechos(Nodo_B padre){
+        if(padre.getHDer() != null){
+            System.out.println(padre.getHDer().getId() + " Nodo Derecho");
+            imprimirNodosDerechos(padre.getHDer());
+        }
+    }
+    
+    public int getSize() {
+        return size;
+    }
+    
     
 }

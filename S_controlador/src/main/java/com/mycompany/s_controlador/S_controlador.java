@@ -40,22 +40,42 @@ public class S_controlador {
     }
     
     
-    public void cargar() throws IOException{
+    public void cargar(){
+        try {
         this.documentos = FilesReader.readFiles();
         Nodo_D_E_C __act = this.documentos.getHead();
         
         do {
             Arbol_B arbolBinario = new Arbol_B();
             Lista_D_E_C palabras = (Lista_D_E_C) __act.getData();
+            
             Nodo_D_E_C palabra = palabras.getHead();
+            
+            
             do {
-                cargar_a_bst(palabra, arbolBinario);
+                System.out.println(palabra.getId() + " ACTUAL");
+                cargar_a_bst(palabra.getId(), palabra ,arbolBinario);
                 palabra = palabra.get_N();
             } while (palabra != palabras.getHead());
+            
+           
+            
             Nodo_D_E_C nodo = new Nodo_D_E_C(__act.getId(), arbolBinario);
+            System.out.println(nodo.getId() + "NODO QUE SE METE EN EL ARBOL");
             this.__bst.add_n_last(nodo);
             __act = __act.get_N();
+            
+            System.out.println(__act.getId() + "ARCHIVO DE ARCHIVOS");
+            
         } while (__act != this.documentos.getHead());
+        } catch (Exception e){
+            System.out.println("ERROR EN LA CARGA EN ARBOL" + e);
+        }
+        try {
+        on_server();
+        } catch (Exception e){
+            System.out.println("No sirve el server" + e);
+        }
     }
     
     
@@ -69,19 +89,9 @@ public class S_controlador {
     
     
     
-    private void cargar_a_bst(Nodo_D_E_C NodoPalabra, Arbol_B arbolBinario){
+    private int cargar_a_bst(String id,Nodo_D_E_C nodo, Arbol_B arbolBinario){
+        Nodo_D_E_C NodoPalabra = new Nodo_D_E_C(id, nodo);
         
-        /*              NodoArbolBinario _abbt_aux = _abbt.exist(__act_aux.getId());
-        if(_abbt_aux!=null){
-        Lista_D_E_C rr = (Lista_D_E_C) _abbt_aux.getData();
-        Nodo_D_E_C nodo = new Nodo_D_E_C(__act_aux.getId(),__act_aux);
-        rr.add_n_last(nodo);
-        }else{
-        Lista_D_E_C rr = new Lista_D_E_C();
-        Nodo_D_E_C nodo = new Nodo_D_E_C(__act_aux.getId());
-        rr.add_n_last(nodo);
-        _abbt.add(__act_aux.getId(), rr);
-        }*/
         Nodo_B nodoEncontrado = arbolBinario.buscarNodo(NodoPalabra.getId());
         if(nodoEncontrado == null){
             Lista_D_E_C lista = new Lista_D_E_C();
@@ -92,7 +102,7 @@ public class S_controlador {
             Lista_D_E_C ListaEncontrada = (Lista_D_E_C) nodoEncontrado.getData();
             ListaEncontrada.add_n_last(NodoPalabra);
         }
-        
+        return 1;
     }
     
     private void on_server() throws IOException{
@@ -125,19 +135,26 @@ public class S_controlador {
                         for(String i : palabras){
                             System.out.println(i);
                         }
-                        Nodo_D_E_C n_avl = this.__avl.getHead();
+                        Nodo_D_E_C n_bst = this.__bst.getHead();
                         
                         do{
-                            Arbol_AVL t_avl = (Arbol_AVL) n_avl.getData();
+                            //Arbol_AVL t_avl = (Arbol_AVL) n_avl.getData();
+                            Arbol_B t_bst = (Arbol_B) n_bst.getData();
+                            //System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
+                            //t_bst.imprimirNodosDerechos();
+ 
+                            //t_bst.buscarNodo("fortuna");
                             
-                            for(String i : palabras){    
-                                Lista_D_E_C _C = t_avl.buscar(i);
-                                this.alzar_bandera(_C);
-                            }
+                            //for(String i : palabras){    
+                            //    t_bst.buscarNodo(i);
+                            //    System.out.println(t_bst.buscarNodo(i).getId());
+                            //    System.out.println(i);
+                            //}
+                            //n_avl = n_avl.get_N();
                             
-                            n_avl = n_avl.get_N();
                             
-                        }while(n_avl!=this.__avl.getHead());
+                            n_bst = n_bst.get_N();
+                        }while(n_bst!=this.__bst.getHead());
                         String x = to_html_f();
                         out.writeUTF(x);
                         this.limpia_bandera();
@@ -173,9 +190,9 @@ public class S_controlador {
                         
                         AbrirArchivos.abrir(s[1]);
                     } else{
+                        this.documentos = FilesReader.readFiles();
                         String x = to_html_f();
                         out.writeUTF(x);
-
                     }
                     
                 clientSocket.close();
@@ -198,7 +215,7 @@ public class S_controlador {
             
             String html = id+"@@@<html><head></head><body>";
             Nodo_D_E_C act = documento.getHead();
-            while(act.get_N() != documento.getHead()){
+            do{
                 if(act.getFlag() && closed){
                     html += "<font color = red>";
                     html += " " + actual.getId();
@@ -214,7 +231,8 @@ public class S_controlador {
                 }
                 html += "</body></html>";
                 act = act.get_N();
-            }
+            } while(act != documento.getHead());
+            
             if(actual.get_N() != this.documentos.getHead()){
                 html_final += html + "-_-";
             }else{
