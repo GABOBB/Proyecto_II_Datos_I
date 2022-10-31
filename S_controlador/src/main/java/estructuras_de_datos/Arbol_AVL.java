@@ -18,37 +18,75 @@ public class Arbol_AVL {
         return (a > b) ? a : b;
     }
     
-    public Lista_D_E_C exist(String search){
-        return exist(this.root, search);
+    public Nodo_AVL exist(String search,Nodo_D_E_C nodo){
+        Nodo_AVL temp = exist(this.root, search);
+        if(temp!=null){
+            Lista_D_E_C lis = (Lista_D_E_C) temp.getData();
+            lis.add_n_last(nodo);}
+        
+        return temp;
     }
     
-    private Lista_D_E_C exist(Nodo_AVL root, String search){
-        Lista_D_E_C lis1 = new Lista_D_E_C();
+    private Nodo_AVL exist(Nodo_AVL root, String search){
+        //Lista_D_E_C lis1 = new Lista_D_E_C();
         
-        if(root == null){
-            return lis1;
+        if(root == null || (root.getId()).equals(search)){
+            return root;
             
         } else if (search.compareTo(root.getId()) > 0) {
             
-            if (root.getId().contains(search)){
+            /*if (root.getId().contains(search)){
             Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
-            lis1.add_n_last(nodo); 
-            }
+            lis1.add_n_last(nodo);
+            }*/
             
             return exist(root.right, search);
             
         } else if (search.compareTo(root.getId()) < 0) {
             
-            if (root.getId().contains(search)){
+            /*if (root.getId().contains(search)){
             Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
             lis1.add_n_last(nodo);
-            }
+            }*/
             
             return exist(root.left, search);
             
         }
         return null;
     }
+    
+    public Lista_D_E_C buscar(String search){
+        Lista_D_E_C temp = buscar(this.root, search);
+        return temp;
+        }
+    
+    private Lista_D_E_C buscar(Nodo_AVL root, String search){
+        Lista_D_E_C lis1 = new Lista_D_E_C();
+        
+        if(root == null || (root.getId()).contains(search)){
+            return lis1;
+            
+        } else if (search.compareTo(root.getId()) > 0) {
+            
+            if (root.getId().contains(search)){
+            Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
+            lis1.add_n_last(nodo);
+            }
+            
+            return buscar(root.right, search);
+            
+        } else {
+            
+            if (root.getId().contains(search)){
+            Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
+            lis1.add_n_last(nodo);
+            }
+            
+            return buscar(root.left, search);
+            
+        }
+    }
+    
     
    public Nodo_AVL rotacionDerecha(Nodo_AVL y){
        Nodo_AVL x = y.left;
@@ -80,8 +118,14 @@ public class Arbol_AVL {
            return 0;
        return height(N.left) - height(N.right);
    }
+    public void insert(String key, Nodo_D_E_C nodo){
+        Nodo_AVL n_t = this.insert(root, key);
+        Lista_D_E_C lis = (Lista_D_E_C) n_t.coincidencias;
+        lis.add_n_last(nodo);
+    }
    
-    public Nodo_AVL insert(Nodo_AVL node, String key) {
+   
+    private Nodo_AVL insert(Nodo_AVL node, String key) {
         if (node == null)
             return (new Nodo_AVL(key));
  

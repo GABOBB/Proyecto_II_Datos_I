@@ -16,6 +16,10 @@ public class Nodo_AVL {
     
     int height;
     
+    public Object getData(){
+        return this.coincidencias;
+    }
+    
     public Nodo_AVL(String id, Object coincidencia) {
         this.__id = id;
         this.coincidencias = coincidencia;
