@@ -16,8 +16,10 @@ import java.util.logging.Logger;
 import FilesLoader.ReadFile;
 import estructuras_de_datos.ArbolBinarioBusqueda;
 import estructuras_de_datos.Arbol_AVL;
+import estructuras_de_datos.Arbol_B;
 import estructuras_de_datos.NodoArbolBinario;
 import estructuras_de_datos.Nodo_AVL;
+import estructuras_de_datos.Nodo_B;
 
 
 
@@ -41,46 +43,56 @@ public class S_controlador {
     public void cargar() throws IOException{
         this.documentos = FilesReader.readFiles();
         Nodo_D_E_C __act = this.documentos.getHead();
-        do{
-            Arbol_AVL _avlt = new Arbol_AVL();  
-            ArbolBinarioBusqueda _abbt = new ArbolBinarioBusqueda();
-            
-            Lista_D_E_C l_temp = (Lista_D_E_C) __act.getData();
-            Nodo_D_E_C __act_aux = l_temp.getHead();
-            
-            do{
-                cargar_a_avl(__act_aux, _avlt);
-            //cargar_a_bst(__act_aux,_abbt);
-            
-            }while(__act_aux!=l_temp.getHead());
-            Nodo_D_E_C nodo = new Nodo_D_E_C(__act.getId(),_avlt);
-            this.__avl.add_n_last(nodo);
+        
+        do {
+            Arbol_B arbolBinario = new Arbol_B();
+            Lista_D_E_C palabras = (Lista_D_E_C) __act.getData();
+            Nodo_D_E_C palabra = palabras.getHead();
+            do {
+                cargar_a_bst(palabra, arbolBinario);
+                palabra = palabra.get_N();
+            } while (palabra != palabras.getHead());
+            Nodo_D_E_C nodo = new Nodo_D_E_C(__act.getId(), arbolBinario);
+            this.__bst.add_n_last(nodo);
             __act = __act.get_N();
-        }while(__act != this.documentos.getHead());
-        on_server();
+        } while (__act != this.documentos.getHead());
     }
+    
+    
     private void cargar_a_avl(Nodo_D_E_C n_l, Arbol_AVL _avl){
         
         Nodo_AVL n_avl = _avl.exist(n_l.getId(),n_l);
         if(n_avl != null){
             _avl.insert(n_avl.getId(), n_l);
         }
-        
-        
     }
-    private void cargar_a_bst(Nodo_D_E_C __act_aux, ArbolBinarioBusqueda _abbt){
+    
+    
+    
+    private void cargar_a_bst(Nodo_D_E_C NodoPalabra, Arbol_B arbolBinario){
         
-                NodoArbolBinario _abbt_aux = _abbt.exist(__act_aux.getId());
-                if(_abbt_aux!=null){
-                    Lista_D_E_C rr = (Lista_D_E_C) _abbt_aux.getData();
-                    Nodo_D_E_C nodo = new Nodo_D_E_C(__act_aux.getId(),__act_aux);
-                    rr.add_n_last(nodo);
-                }else{
-                    Lista_D_E_C rr = new Lista_D_E_C();
-                    Nodo_D_E_C nodo = new Nodo_D_E_C(__act_aux.getId());
-                    rr.add_n_last(nodo);
-                    _abbt.add(__act_aux.getId(), rr);
-                }
+        /*              NodoArbolBinario _abbt_aux = _abbt.exist(__act_aux.getId());
+        if(_abbt_aux!=null){
+        Lista_D_E_C rr = (Lista_D_E_C) _abbt_aux.getData();
+        Nodo_D_E_C nodo = new Nodo_D_E_C(__act_aux.getId(),__act_aux);
+        rr.add_n_last(nodo);
+        }else{
+        Lista_D_E_C rr = new Lista_D_E_C();
+        Nodo_D_E_C nodo = new Nodo_D_E_C(__act_aux.getId());
+        rr.add_n_last(nodo);
+        _abbt.add(__act_aux.getId(), rr);
+        }*/
+        Nodo_B nodoEncontrado = arbolBinario.buscarNodo(NodoPalabra.getId());
+        if(nodoEncontrado == null){
+            Lista_D_E_C lista = new Lista_D_E_C();
+            lista.add_n_last(NodoPalabra);
+            Nodo_B nodoNuevo = new Nodo_B(NodoPalabra.getId(), lista);
+            arbolBinario.addNodo(nodoNuevo, NodoPalabra);
+        } else {
+            Lista_D_E_C ListaEncontrada = (Lista_D_E_C) nodoEncontrado.getData();
+            ListaEncontrada.add_n_last(NodoPalabra);
+        }
+        
     }
     
     private void on_server() throws IOException{
@@ -110,6 +122,9 @@ public class S_controlador {
                     
                     if(message.contains("P@@@")){
                         String[] palabras = message.split("@@@")[1].split(" ");
+                        for(String i : palabras){
+                            System.out.println(i);
+                        }
                         Nodo_D_E_C n_avl = this.__avl.getHead();
                         
                         do{
