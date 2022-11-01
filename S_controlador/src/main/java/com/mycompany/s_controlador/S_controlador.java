@@ -86,12 +86,13 @@ public class S_controlador {
     
     private void cargar_a_bst(String id, Arbol_B arbolBinario, Nodo_D_E_C MiNodo){
         Nodo_D_E_C NodoPalabra = new Nodo_D_E_C(id);
-        Nodo_B nodoEncontrado = arbolBinario.buscarNodo(NodoPalabra.getId());
+        Nodo_B nodoEncontrado = arbolBinario.buscarNodo(id);
         
         if(nodoEncontrado == null){
             Lista_D_E_C lista = new Lista_D_E_C();
             Nodo_D_E_C tempNodo = new Nodo_D_E_C(id, MiNodo);
-            lista.add_n_last(tempNodo);
+            NodoPalabra.setData(tempNodo);
+            lista.add_n_last(NodoPalabra);
             Nodo_B nodoNuevo = new Nodo_B(NodoPalabra.getId(), lista);
             arbolBinario.addNodo(nodoNuevo);
         } else {
@@ -157,14 +158,17 @@ public class S_controlador {
                                 System.out.println(palabras[0]);
                                 Lista_D_E_C informacion = (Lista_D_E_C) k.getData();
                                 //alzar_bandera(informacion);
+                                //Nodo_D_E_C Marquito = informacion.getHead();
+                                //Nodo_D_E_C MiMarquito = (Nodo_D_E_C) Marquito.getData();
+                                //System.out.println(MiMarquito.getId() + MiMarquito.get_N().getId());
                                 Nodo_D_E_C Marquito = informacion.getHead();
-                                Nodo_D_E_C MiMarquito = (Nodo_D_E_C) Marquito.getData();
-                                System.out.println(MiMarquito.getId() + MiMarquito.get_N().getId());
                                 
-                                for(int b = 0; b < 4; b++){
-                                    MiMarquito.setFlag(true);
-                                    MiMarquito = MiMarquito.get_N();
-                                }
+                                do{
+                                    //Nodo_D_E_C Marquito = informacion.getHead();
+                                    Nodo_D_E_C MiMarquito = (Nodo_D_E_C) Marquito.getData();
+                                    System.out.println(Marquito.getId() + " Marcador");
+                                    Marquito = Marquito.get_N();
+                                } while (Marquito != informacion.getHead());
                             //}
                             //n_avl = n_avl.get_N();
                             
