@@ -150,6 +150,7 @@ public class S_controlador {
                     if(message.contains("P@@@")){
                         String[] palabras = message.split("@@@")[1].split(" ");
                         Lista_D_E_C Godzilla = new Lista_D_E_C();
+                        try {
                         for(String i : palabras){
                             System.out.println(i);
                         }
@@ -204,6 +205,10 @@ public class S_controlador {
                         String x = to_html_f(Godzilla);
                         out.writeUTF(x);
                         this.limpia_bandera();
+                        } catch (Exception e) {
+                            String x = to_html_f();
+                            out.writeUTF(x);
+                        }
                         
                     }else if(message.contains("F@@@")){
                         String[] palabras = message.split("@@@")[1].split(" ");
