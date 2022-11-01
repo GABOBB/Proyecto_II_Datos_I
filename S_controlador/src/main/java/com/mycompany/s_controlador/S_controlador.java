@@ -57,7 +57,7 @@ public class S_controlador {
                 //ESTO ESTA BIEN COMO SE CARGA, EL ERROR ESTA ADENTRO :) 
                 
                 
-                cargar_a_bst(palabra.getId(),arbolBinario, palabras);
+                cargar_a_bst(palabra.getId(),arbolBinario, palabra);
                 
                 System.out.println("Se Carga ID" + palabra.getId());
                 System.out.println("Se carga palabra" + palabra.get_N().get_N().getId());
@@ -93,14 +93,14 @@ public class S_controlador {
     
     
     
-    private void cargar_a_bst(String id, Arbol_B arbolBinario, Lista_D_E_C MiLista){
+    private void cargar_a_bst(String id, Arbol_B arbolBinario, Nodo_D_E_C MiNodo){
         Nodo_D_E_C NodoPalabra = new Nodo_D_E_C(id);
         
         Nodo_B nodoEncontrado = arbolBinario.buscarNodo(id);
         
         if(nodoEncontrado == null){
             Lista_D_E_C lista = new Lista_D_E_C();
-            Nodo_D_E_C tempNodo = new Nodo_D_E_C(id, MiLista.getHead().getData());
+            Nodo_D_E_C tempNodo = new Nodo_D_E_C(id, MiNodo);
             NodoPalabra.setData(tempNodo);
             lista.add_n_last(NodoPalabra);
             Nodo_B nodoNuevo = new Nodo_B(NodoPalabra.getId(), lista);
@@ -108,9 +108,9 @@ public class S_controlador {
             System.out.println("Lo que meto en ID " + nodoNuevo.getId() + "Lo que meto en LISTA" + nodoNuevo.getData());
             
             System.out.println("ID de lista" +
-                    MiLista.getHead().getId() +
-                    MiLista.getHead().get_N().getId() +
-                    MiLista.getHead().get_N().get_N().getId());
+                    MiNodo.getId() +
+                    MiNodo.get_N().getId() +
+                    MiNodo.get_N().get_N().getId());
 
             arbolBinario.addNodo(nodoNuevo);
             
