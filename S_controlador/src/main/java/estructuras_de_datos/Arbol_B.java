@@ -22,11 +22,11 @@ public class Arbol_B {
         return this.root; 
     }
     
-    public void addNodo(Nodo_B _a, Nodo_D_E_C nodoLista){
-        Nodo_B nodoPalabra = addNodo(_a, this.root);
-        Lista_D_E_C lista = (Lista_D_E_C) nodoPalabra.getData();
-        lista.add_n_last(nodoLista);
-    }
+    /*    public void addNodo(Nodo_B _a, Nodo_D_E_C nodoLista){
+    Nodo_B nodoPalabra = addNodo(_a, this.root);
+    Lista_D_E_C lista = (Lista_D_E_C) nodoPalabra.getData();
+    lista.add_n_last(nodoLista);
+    }*/
     
     /*private Nodo_B addNodo(Nodo_B _a, Nodo_B padre){
     //System.out.println(_a.getId() + "Dentro del Arbol");
@@ -45,6 +45,10 @@ public class Arbol_B {
     }
     */
     
+    public Nodo_B addNodo(Nodo_B _a){
+        return addNodo(_a, this.root);
+    }
+    
     private Nodo_B addNodo(Nodo_B _a, Nodo_B padre){
         Nodo_B x = this.root;
         Nodo_B y = null;
@@ -58,7 +62,9 @@ public class Arbol_B {
         }
         if (y == null){
             size++;
-            y = _a;
+            //y = _a;
+            //x = _a;
+            root = _a;
         } else if (_a.getId().compareTo(y.getId()) > 0){
             size++;
             y.setHDer(_a);
@@ -94,15 +100,17 @@ public class Arbol_B {
     private Nodo_B buscarNodo(Nodo_B padre, String _a){
         while (padre != null){
             if (_a.compareTo(padre.getId()) > 0){
-                System.out.println("derecha");
+                System.out.println(padre.getId() + " derecha");
                 padre = padre.getHDer();
             } else if (_a.compareTo(padre.getId()) < 0){
-                System.out.println("izquierda");
+                System.out.println(padre.getId() + " izquierda");
                 padre = padre.getHIzq();
             } else {
+                System.out.println("LO ENCUENTRA" + padre.getId());
                 return padre;
             }
         }
+        System.out.println("fdjskfdsfdsfds " + padre);
         return padre;
     }
     

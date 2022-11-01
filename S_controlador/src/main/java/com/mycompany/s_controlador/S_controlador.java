@@ -53,7 +53,7 @@ public class S_controlador {
             
             do {
                 //System.out.println(palabra.getId() + " ACTUAL");
-                cargar_a_bst(palabra.getId(),arbolBinario);
+                cargar_a_bst(palabra.getId(),arbolBinario, palabra);
                 palabra = palabra.get_N();
             } while (palabra != palabras.getHead());
             Nodo_D_E_C nodo = new Nodo_D_E_C(__act.getId(), arbolBinario);
@@ -84,15 +84,16 @@ public class S_controlador {
     
     
     
-    private void cargar_a_bst(String id, Arbol_B arbolBinario){
+    private void cargar_a_bst(String id, Arbol_B arbolBinario, Nodo_D_E_C MiNodo){
         Nodo_D_E_C NodoPalabra = new Nodo_D_E_C(id);
         Nodo_B nodoEncontrado = arbolBinario.buscarNodo(NodoPalabra.getId());
         
         if(nodoEncontrado == null){
             Lista_D_E_C lista = new Lista_D_E_C();
-            lista.add_n_last(NodoPalabra);
+            Nodo_D_E_C tempNodo = new Nodo_D_E_C(id, MiNodo);
+            lista.add_n_last(tempNodo);
             Nodo_B nodoNuevo = new Nodo_B(NodoPalabra.getId(), lista);
-            arbolBinario.addNodo(nodoNuevo, NodoPalabra);
+            arbolBinario.addNodo(nodoNuevo);
         } else {
             Lista_D_E_C ListaEncontrada = (Lista_D_E_C) nodoEncontrado.getData();
             ListaEncontrada.add_n_last(NodoPalabra);
@@ -131,27 +132,45 @@ public class S_controlador {
                         }
                         Nodo_D_E_C n_bst = this.__bst.getHead();
                         
-                        do{
+                        //do{
                             //Arbol_AVL t_avl = (Arbol_AVL) n_avl.getData();
                             Arbol_B t_bst = (Arbol_B) n_bst.getData();
                             System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
                             //t_bst.imprimirNodosDerechos();
                             //System.out.println(t_bst.buscarNodoContenido("Proyecto"));
-                            System.out.println(t_bst.buscarNodo("Nombre") + "ID");
+                            System.out.println(t_bst.buscarNodo(palabras[0]) + " ID");
                             //t_bst.buscarNodo("Proyecto");
                             
+                            /*
+                            Nodo_B k = t_bst.buscarNodo(palabras[0]);
+                            Lista_D_E_C informacion = (Lista_D_E_C) k.getData();
+                            Nodo_D_E_C info = informacion.getHead();
+                            info.setFlag(true);
+                            */
+                            
+                            //alzar_bandera(informacion);
+                            
+                            
                             //for(String i : palabras){
-                            //    Nodo_B k = t_bst.buscarNodo(i);
-                            //    System.out.println(t_bst.buscarNodo(i).getId());
-                            //    System.out.println(i);
-                            //    Lista_D_E_C informacion = (Lista_D_E_C) k.getData();
-                            //    alzar_bandera(informacion);
+                                Nodo_B k = t_bst.buscarNodo(palabras[0]);
+                                System.out.println(t_bst.buscarNodo(palabras[0]).getId());
+                                System.out.println(palabras[0]);
+                                Lista_D_E_C informacion = (Lista_D_E_C) k.getData();
+                                //alzar_bandera(informacion);
+                                Nodo_D_E_C Marquito = informacion.getHead();
+                                Nodo_D_E_C MiMarquito = (Nodo_D_E_C) Marquito.getData();
+                                System.out.println(MiMarquito.getId() + MiMarquito.get_N().getId());
+                                
+                                for(int b = 0; b < 4; b++){
+                                    MiMarquito.setFlag(true);
+                                    MiMarquito = MiMarquito.get_N();
+                                }
                             //}
                             //n_avl = n_avl.get_N();
                             
                             
                             //n_bst = n_bst.get_N();
-                        }while(n_bst!=this.__bst.getHead());
+                        //}while(n_bst!=this.__bst.getHead());
                         String x = to_html_f();
                         out.writeUTF(x);
                         this.limpia_bandera();
@@ -226,10 +245,10 @@ public class S_controlador {
                 }else{
                     html += " " + act.getId();
                 }
-                html += "</body></html>";
+                
                 act = act.get_N();
             } while(act != documento.getHead());
-            
+            html += "</body></html>";
             if(actual.get_N() != this.documentos.getHead()){
                 html_final += html + "-_-";
             }else{
@@ -261,7 +280,7 @@ public class S_controlador {
         Nodo_D_E_C af = lista_F.getHead();
         do{
             af.setFlag(true);
-            
+            System.out.println(af.getFlag() + " Flag");
             af = af.get_N();
             
         }while(af != lista_F.getHead());
