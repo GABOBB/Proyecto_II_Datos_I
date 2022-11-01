@@ -46,7 +46,7 @@ public class S_controlador {
         Nodo_D_E_C __act = this.documentos.getHead();
         
         do {
-            Arbol_B arbolBinario = new Arbol_B();
+            Arbol_B arbolBinario = new Arbol_B(__act.getId());
             Lista_D_E_C palabras = (Lista_D_E_C) __act.getData();
             Nodo_D_E_C palabra = palabras.getHead();
             
@@ -137,13 +137,15 @@ public class S_controlador {
                             System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
                             //t_bst.imprimirNodosDerechos();
                             //System.out.println(t_bst.buscarNodoContenido("Proyecto"));
-                            System.out.println(t_bst.getRoot().getId() + "ID");
+                            System.out.println(t_bst.buscarNodo("Nombre") + "ID");
                             //t_bst.buscarNodo("Proyecto");
                             
-                            //for(String i : palabras){    
-                            //    t_bst.buscarNodo(i);
+                            //for(String i : palabras){
+                            //    Nodo_B k = t_bst.buscarNodo(i);
                             //    System.out.println(t_bst.buscarNodo(i).getId());
                             //    System.out.println(i);
+                            //    Lista_D_E_C informacion = (Lista_D_E_C) k.getData();
+                            //    alzar_bandera(informacion);
                             //}
                             //n_avl = n_avl.get_N();
                             

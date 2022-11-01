@@ -17,6 +17,8 @@ public class Nodo_B {
     public Nodo_B(String id, Object data) {
         this.id = id;
         this.data = data;
+        this.HIzq = null;
+        this.HDer = null;
     }
 
     public String getId() {

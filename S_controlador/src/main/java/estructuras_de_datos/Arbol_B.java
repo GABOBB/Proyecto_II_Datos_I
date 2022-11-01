@@ -14,6 +14,10 @@ public class Arbol_B {
     private int Depth;
     private String id;
     
+    public Arbol_B (String k){
+        this.id = k;
+    }
+    
     public Nodo_B getRoot(){
         return this.root; 
     }
@@ -24,53 +28,98 @@ public class Arbol_B {
         lista.add_n_last(nodoLista);
     }
     
+    /*private Nodo_B addNodo(Nodo_B _a, Nodo_B padre){
+    //System.out.println(_a.getId() + "Dentro del Arbol");
+    if (padre == null){
+    this.size++;
+    System.out.println(_a.getId() + "Lo que se incerta");
+    return padre = _a;
+    } else if(_a.getId().compareTo(padre.getId()) > 0){
+    //System.out.println("Se fue a la derecha");
+    return addNodo(_a, padre.getHDer());
+    } else if(_a.getId().compareTo(padre.getId()) < 0){
+    //System.out.println("Se fue a la izquierda");
+    return addNodo(_a, padre.getHIzq());
+    }
+    return padre;
+    }
+    */
+    
     private Nodo_B addNodo(Nodo_B _a, Nodo_B padre){
-        //System.out.println(_a.getId() + "Dentro del Arbol");
-        if (padre == null){
-            this.size++;
-            System.out.println(_a.getId() + "Lo que se incerta");
-            return root = _a;
-        } else if(_a.getId().compareTo(padre.getId()) > 0){
-                //System.out.println("Se fue a la derecha");
-                return addNodo(_a, padre.getHDer());
-        } else if(_a.getId().compareTo(padre.getId()) < 0){
-                //System.out.println("Se fue a la izquierda");
-                return addNodo(_a, padre.getHIzq());
+        Nodo_B x = this.root;
+        Nodo_B y = null;
+        while(x != null){
+            y = x;
+            if((_a.getId()).compareTo(padre.getId()) > 0){
+                x = x.getHDer();
+            } else {
+                x = x.getHIzq();
+            }
+        }
+        if (y == null){
+            size++;
+            y = _a;
+        } else if (_a.getId().compareTo(y.getId()) > 0){
+            size++;
+            y.setHDer(_a);
+        } else {
+            size++;
+            y.setHIzq(_a);
+        }
+        return y;
+    }
+    
+    /*    public Nodo_B buscarNodo(String _a){
+    if(root != null){
+    System.out.println(root.getId() + "ESTA ES LA RAIZ ");
+    }
+    return buscarNodo(_a, this.root);
+    }
+    private Nodo_B buscarNodo(String _a, Nodo_B padre){
+    if (padre == null || _a.equals(padre.getId())){
+    return padre;
+    } else if(_a.compareTo(padre.getId()) > 0){
+    System.out.println("SE LLAMA DERECHA");
+    return buscarNodo(_a, padre.getHDer());
+    } else {
+    System.out.println("SE LLAMA IZQUIERDA");
+    return buscarNodo(_a, padre.getHIzq());
+    }
+    }*/
+    
+    public Nodo_B buscarNodo(String _a){
+        return buscarNodo(this.root, _a);
+    }
+    
+    private Nodo_B buscarNodo(Nodo_B padre, String _a){
+        while (padre != null){
+            if (_a.compareTo(padre.getId()) > 0){
+                System.out.println("derecha");
+                padre = padre.getHDer();
+            } else if (_a.compareTo(padre.getId()) < 0){
+                System.out.println("izquierda");
+                padre = padre.getHIzq();
+            } else {
+                return padre;
+            }
         }
         return padre;
     }
     
-    public Nodo_B buscarNodo(String _a){
-        if(root != null){
-            System.out.println(root.getId() + "ESTA ES LA RAIZ ");
-        }
-        return buscarNodo(_a, this.root);
-    }
-    private Nodo_B buscarNodo(String _a, Nodo_B padre){
-        if (padre == null || _a.equals(padre.getId())){
-            return padre;
-        } else if(_a.compareTo(padre.getId()) > 0){
-            System.out.println("SE LLAMA DERECHA");
-            return buscarNodo(_a, padre.getHDer());
-        } else {
-            System.out.println("SE LLAMA IZQUIERDA");
-            return buscarNodo(_a, padre.getHIzq());
-        }
-    }
-    
-    public Nodo_B buscarNodoContenido(String _a){
-        return buscarNodoContenido(_a, this.root);
+    /*    public Nodo_B buscarNodoContenido(String _a){
+    return buscarNodoContenido(_a, this.root);
     }
     
     private Nodo_B buscarNodoContenido(String _a, Nodo_B padre){
-        if ((padre.getId()).contains(_a) || padre == null){
-            return padre;
-        } else if(_a.compareTo(padre.getId()) > 0){
-            return buscarNodo(_a, padre.getHDer());
-        } else {
-            return buscarNodo(_a, padre.getHIzq());
-        }
+    System.out.println(padre.getId() + " PADRE");
+    if ((padre.getId()).contains(_a) || padre == null){
+    return padre;
+    } else if(_a.compareTo(padre.getId()) > 0){
+    return buscarNodo(_a, padre.getHDer());
+    } else {
+    return buscarNodo(_a, padre.getHIzq());
     }
+    }*/
     
     public void imprimirNodosDerechos(){
         imprimirNodosDerechos(this.root);
