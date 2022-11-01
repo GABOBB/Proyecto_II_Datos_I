@@ -53,7 +53,16 @@ public class S_controlador {
             
             do {
                 //System.out.println(palabra.getId() + " ACTUAL");
-                cargar_a_bst(palabra.getId(),arbolBinario, palabra);
+                
+                //ESTO ESTA BIEN COMO SE CARGA, EL ERROR ESTA ADENTRO :) 
+                
+                
+                cargar_a_bst(palabra.getId(),arbolBinario, palabras);
+                
+                System.out.println("Se Carga ID" + palabra.getId());
+                System.out.println("Se carga palabra" + palabra.get_N().get_N().getId());
+                
+                
                 palabra = palabra.get_N();
             } while (palabra != palabras.getHead());
             Nodo_D_E_C nodo = new Nodo_D_E_C(__act.getId(), arbolBinario);
@@ -84,17 +93,28 @@ public class S_controlador {
     
     
     
-    private void cargar_a_bst(String id, Arbol_B arbolBinario, Nodo_D_E_C MiNodo){
+    private void cargar_a_bst(String id, Arbol_B arbolBinario, Lista_D_E_C MiLista){
         Nodo_D_E_C NodoPalabra = new Nodo_D_E_C(id);
+        
         Nodo_B nodoEncontrado = arbolBinario.buscarNodo(id);
         
         if(nodoEncontrado == null){
             Lista_D_E_C lista = new Lista_D_E_C();
-            Nodo_D_E_C tempNodo = new Nodo_D_E_C(id, MiNodo);
+            Nodo_D_E_C tempNodo = new Nodo_D_E_C(id, MiLista.getHead().getData());
             NodoPalabra.setData(tempNodo);
             lista.add_n_last(NodoPalabra);
             Nodo_B nodoNuevo = new Nodo_B(NodoPalabra.getId(), lista);
+            //System.out.println("LISTA " + lista.getHead().getData() + lista.getHead().get_N().getData());
+            System.out.println("Lo que meto en ID " + nodoNuevo.getId() + "Lo que meto en LISTA" + nodoNuevo.getData());
+            
+            System.out.println("ID de lista" +
+                    MiLista.getHead().getId() +
+                    MiLista.getHead().get_N().getId() +
+                    MiLista.getHead().get_N().get_N().getId());
+
             arbolBinario.addNodo(nodoNuevo);
+            
+            
         } else {
             Lista_D_E_C ListaEncontrada = (Lista_D_E_C) nodoEncontrado.getData();
             ListaEncontrada.add_n_last(NodoPalabra);
@@ -140,35 +160,12 @@ public class S_controlador {
                             //t_bst.imprimirNodosDerechos();
                             //System.out.println(t_bst.buscarNodoContenido("Proyecto"));
                             System.out.println(t_bst.buscarNodo(palabras[0]) + " ID");
-                            //t_bst.buscarNodo("Proyecto");
                             
-                            /*
-                            Nodo_B k = t_bst.buscarNodo(palabras[0]);
-                            Lista_D_E_C informacion = (Lista_D_E_C) k.getData();
-                            Nodo_D_E_C info = informacion.getHead();
-                            info.setFlag(true);
-                            */
-                            
-                            //alzar_bandera(informacion);
+                            Nodo_B nodoInfo = t_bst.buscarNodo(palabras[0]);
                             
                             
-                            //for(String i : palabras){
-                                Nodo_B k = t_bst.buscarNodo(palabras[0]);
-                                System.out.println(t_bst.buscarNodo(palabras[0]).getId());
-                                System.out.println(palabras[0]);
-                                Lista_D_E_C informacion = (Lista_D_E_C) k.getData();
-                                //alzar_bandera(informacion);
-                                //Nodo_D_E_C Marquito = informacion.getHead();
-                                //Nodo_D_E_C MiMarquito = (Nodo_D_E_C) Marquito.getData();
-                                //System.out.println(MiMarquito.getId() + MiMarquito.get_N().getId());
-                                Nodo_D_E_C Marquito = informacion.getHead();
-                                
-                                do{
-                                    //Nodo_D_E_C Marquito = informacion.getHead();
-                                    Nodo_D_E_C MiMarquito = (Nodo_D_E_C) Marquito.getData();
-                                    System.out.println(Marquito.getId() + " Marcador");
-                                    Marquito = Marquito.get_N();
-                                } while (Marquito != informacion.getHead());
+                            
+                            
                             //}
                             //n_avl = n_avl.get_N();
                             
