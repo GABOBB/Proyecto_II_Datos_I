@@ -100,7 +100,8 @@ public class S_controlador {
         
         if(nodoEncontrado == null){
             Lista_D_E_C lista = new Lista_D_E_C();
-            Nodo_D_E_C tempNodo = new Nodo_D_E_C(id, MiNodo);
+            Nodo_D_E_C tempNodo = new Nodo_D_E_C(id);
+            tempNodo.set_N(MiNodo);
             NodoPalabra.setData(tempNodo);
             lista.add_n_last(NodoPalabra);
             Nodo_B nodoNuevo = new Nodo_B(NodoPalabra.getId(), lista);
@@ -148,12 +149,13 @@ public class S_controlador {
                     
                     if(message.contains("P@@@")){
                         String[] palabras = message.split("@@@")[1].split(" ");
+                        Lista_D_E_C Godzilla = new Lista_D_E_C();
                         for(String i : palabras){
                             System.out.println(i);
                         }
                         Nodo_D_E_C n_bst = this.__bst.getHead();
                         
-                        //do{
+                        do{
                             //Arbol_AVL t_avl = (Arbol_AVL) n_avl.getData();
                             Arbol_B t_bst = (Arbol_B) n_bst.getData();
                             System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
@@ -163,18 +165,46 @@ public class S_controlador {
                             
                             Nodo_B nodoInfo = t_bst.buscarNodo(palabras[0]);
                             
+                            Lista_D_E_C Marquito = (Lista_D_E_C) nodoInfo.getData();
+                            Nodo_D_E_C Marquitos = (Nodo_D_E_C) Marquito.getHead();
                             
+                            do {
+                                Nodo_D_E_C UltimoAux = (Nodo_D_E_C) Marquitos.getData();
+                                Nodo_D_E_C NodoAux = UltimoAux.get_N();
+                                Nodo_D_E_C NodoAuxAux = NodoAux;
+                                Godzilla.setHead(NodoAux);
+                                do {
+                                    System.out.println(NodoAux.getId() + "ZORRAS");
+                                    //Godzilla.add_n_last(NodoAux);
+                                    NodoAux = NodoAux.get_N();
+                                } while(NodoAuxAux != NodoAux );
+                                
+                                NodoAux.setFlag(true);
+                                System.out.println(NodoAux.getId() + "MAMAPICHAS");
+                                Marquitos = Marquitos.get_N();
+                                
+                                
+                                System.out.println(Godzilla.getHead().getId() + " GODZILLA");
+                                System.out.println(Godzilla.getHead().get_N().getId()  + " GODZILLA");
+                                System.out.println(Godzilla.getHead().get_N().get_N().getId()  + " GODZILLA");
+                                System.out.println(Godzilla.getHead().get_N().get_N().get_N().getId()  + " GODZILLA");
+                                System.out.println(Godzilla.getHead().get_N().get_N().get_N().get_N().getId()  + " GODZILLA");
+                                
+                            } while (Marquitos != Marquito.getHead());
                             
-                            
+                            //System.out.println("TIPO DE LISTA " + Godzilla.getHead().getData().getClass());
                             //}
                             //n_avl = n_avl.get_N();
                             
                             
                             //n_bst = n_bst.get_N();
-                        //}while(n_bst!=this.__bst.getHead());
-                        String x = to_html_f();
+                        }while(n_bst!=this.__bst.getHead());
+                        //String x = to_html_f();
+                        
+                        String x = to_html_f(Godzilla);
                         out.writeUTF(x);
                         this.limpia_bandera();
+                        
                     }else if(message.contains("F@@@")){
                         String[] palabras = message.split("@@@")[1].split(" ");
                     }else if (message.equals("FILECHOOSER")){
@@ -249,6 +279,8 @@ public class S_controlador {
                 
                 act = act.get_N();
             } while(act != documento.getHead());
+            
+            
             html += "</body></html>";
             if(actual.get_N() != this.documentos.getHead()){
                 html_final += html + "-_-";
@@ -258,10 +290,52 @@ public class S_controlador {
             actual = actual.get_N(); 
             
         }while(actual != this.documentos.getHead());
-        
+        //System.out.println(html_final);
         return html_final;
     }
-    
+    private String to_html_f(Lista_D_E_C tempData){
+       
+        String html_final = "";
+        
+
+            String id = tempData.getHead().getId();
+            Nodo_D_E_C documento = (Nodo_D_E_C)(tempData.getHead());
+            
+            boolean closed = true;
+            
+            String html = id+"@@@<html><head></head><body>";
+            Nodo_D_E_C act = tempData.getHead();
+            
+            do{
+                if(act.getFlag() && closed){
+                    html += "<font color = red>";
+                    html += " " + tempData.getHead().getId();
+                    closed = false;
+                }else if(!act.getFlag() && !closed){
+                    html += "</font>";
+                    html += " " + tempData.getHead().getId();
+                    closed=true;
+                }else if(act.getFlag() && !closed){
+                    html += " " + act.getId();
+                }else{
+                    html += " " + act.getId();
+                }
+                
+                act = act.get_N();
+            } while(act != tempData.getHead());
+            
+            html += "</body></html>";
+            if(documento.get_N() != tempData.getHead()){
+                html_final  += html + "-_-";
+            } else {
+                html_final += html + "-_-";
+            }
+            documento = documento.get_N();
+            
+            
+            System.out.println(html_final);
+        return html_final;
+    }
 
     public void limpia_bandera(){
         Nodo_D_E_C act_d = this.documentos.getHead();

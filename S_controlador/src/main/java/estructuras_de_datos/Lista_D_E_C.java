@@ -5,7 +5,10 @@ package estructuras_de_datos;
 public class Lista_D_E_C {    
     Nodo_D_E_C head;//refiere a la primera pocision en la lista
     public int size;//refiere a la catidad de nodos que tiene la lista
-
+    
+    public void setHead(Nodo_D_E_C newHead){
+        head = newHead;
+    }
     public Lista_D_E_C(){//inicializa una lista con valores nulos
         this.head = null;
         this.size = 0;
