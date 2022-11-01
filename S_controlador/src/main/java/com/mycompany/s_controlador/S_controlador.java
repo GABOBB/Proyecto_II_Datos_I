@@ -172,13 +172,8 @@ public class S_controlador {
                             do {
                                 Nodo_D_E_C UltimoAux = (Nodo_D_E_C) Marquitos.getData();
                                 Nodo_D_E_C NodoAux = UltimoAux.get_N();
-                                Nodo_D_E_C NodoAuxAux = NodoAux;
                                 Godzilla.setHead(NodoAux);
-                                do {
-                                    System.out.println(NodoAux.getId() + "ZORRAS");
-                                    //Godzilla.add_n_last(NodoAux);
-                                    NodoAux = NodoAux.get_N();
-                                } while(NodoAuxAux != NodoAux );
+                                
                                 
                                 NodoAux.setFlag(true);
                                 System.out.println(NodoAux.getId() + "MAMAPICHAS");
