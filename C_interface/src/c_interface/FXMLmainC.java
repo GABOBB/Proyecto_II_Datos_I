@@ -64,7 +64,19 @@ public class FXMLmainC implements Initializable {
     @FXML
     void AddNewFile(ActionEvent event) throws IOException {
         String d = FileSearcher.FindFile();
-        this.__c.send(d + "PATH");
+        String x = this.__c.send(d + "PATH");
+        this.__tabs.getTabs().clear();
+        cargaI(x);
+    }
+    @FXML
+    void MultipleFile(ActionEvent event) {
+      String Find_Multiple= FileSearcher.FindMultiple();
+      String x = this.__c.send(Find_Multiple);
+      this.__tabs.getTabs().clear();
+      cargaI(x);
+      
+      
+
     }
         
     @FXML

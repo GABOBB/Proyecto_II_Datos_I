@@ -203,12 +203,11 @@ public class S_controlador {
                     } else if (message.contains("PATH")){
                         System.out.println("Detects");
                         String m = message.substring(0, message.length() - 4);
-                        
-                        String x = to_html_f();
-                        out.writeUTF(x);
-                        
                         System.out.println(m);
                         FileCopy.FileLoader(m);
+                        this.documentos = FilesReader.readFiles();
+                        String x = to_html_f();
+                        out.writeUTF(x);
                     } else if (message.equals("Nombre")){
                         System.out.println("Se ordena por el nombre");
                         this.documentos = OrderFiles.OrderByNames();
@@ -229,6 +228,21 @@ public class S_controlador {
                         System.out.println(s[1]);
                         
                         AbrirArchivos.abrir(s[1]);
+                    } else if (message.contains("variosarchivos")){
+                        String[] s = message.split("-_-");
+                        for(int i=1; i<s.length; i++){
+                            System.out.println(s.length);
+                            
+                            System.out.println(s[i]);
+                            FileCopy.FileLoader(s[i]);  
+                            
+                             
+                        }
+                         this.documentos = FilesReader.readFiles();
+                         String x = to_html_f();
+                         out.writeUTF(x);
+                         
+                        
                     } else{
                         this.documentos = FilesReader.readFiles();
                         String x = to_html_f();
