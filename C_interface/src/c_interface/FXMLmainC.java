@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -40,6 +41,10 @@ public class FXMLmainC implements Initializable {
     
     @FXML
     private ComboBox<String> Ordenamiento;
+    @FXML
+    private Button abrir_B;
+    @FXML
+    private Label lable_mesage;
 
 
     /**
@@ -81,6 +86,7 @@ public class FXMLmainC implements Initializable {
         
     @FXML
     private void bBb(ActionEvent event) {
+        if(this.t_f.getText().equals("")){lable_mesage.setText("   _                  _\n      \\ _(•_•)_ /");}
         if(this.modo_b){
             String d = this.t_f.getText();
             String html_text = __c.send("F@@@"+d);
@@ -111,25 +117,20 @@ public class FXMLmainC implements Initializable {
         }
     }
     @FXML
-    void OrdenamientoArchivos(ActionEvent event) {
-        String x = this.__c.send(Ordenamiento.getSelectionModel().getSelectedItem());
+    public void OrdenamientoArchivos(ActionEvent event) {
+        String y = Ordenamiento.getSelectionModel().getSelectedItem();
+        String x = this.__c.send(y);
+        lable_mesage.setText(y);
         this.__tabs.getTabs().clear();
         cargaI(x);
     }
     
     @FXML
-    void abrir(ActionEvent event) {
+    public void abrir(ActionEvent event) {
        
        Tab i = __tabs.getSelectionModel().getSelectedItem();
        String nombre=i.getText();
        System.out.println(nombre);
-       this.__c.send("ruta@" +nombre);
-     
-     
-            
+       this.__c.send("ruta@" +nombre);       
     }
-    
-   
-    
-
 }

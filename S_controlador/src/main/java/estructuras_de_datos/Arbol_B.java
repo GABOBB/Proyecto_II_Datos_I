@@ -14,6 +14,9 @@ public class Arbol_B {
     private int Depth;
     private String id;
     
+    public String getId(){
+        return this.id;
+    }
     public Arbol_B (String k){
         this.id = k;
     }

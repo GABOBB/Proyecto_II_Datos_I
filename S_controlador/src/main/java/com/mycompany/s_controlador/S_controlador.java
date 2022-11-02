@@ -146,13 +146,18 @@ public class S_controlador {
                 
                     
                     if(message.contains("P@@@")){
+                        
                         String htmlTotal = "";
-                        String[] palabras = message.split("@@@")[1].split(" ");
-                        Lista_D_E_C Godzilla = new Lista_D_E_C();
+                        
                         try {
+                            
+                            String[] palabras = message.split("@@@")[1].split(" ");
+                            Lista_D_E_C Godzilla = new Lista_D_E_C();
+                            
                             Nodo_D_E_C n_bst = this.__bst.getHead();
                             do{
                                 Arbol_B t_bst = (Arbol_B) n_bst.getData();
+                                System.out.println(t_bst.getId()+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");    
                                 System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
                                 System.out.println(t_bst.buscarNodo(palabras[0]) + " ID");
                                 for(String TempStr : palabras){                               
@@ -179,28 +184,34 @@ public class S_controlador {
                                 n_bst = n_bst.get_N();
                                 
                                 String x = to_html_f(Godzilla);
-                                
+                                Nodo_D_E_C ACTUALP = Godzilla.getHead();
+                                do{
+                                    System.out.println(ACTUALP.getId()+ "");
+                                }while(ACTUALP != Godzilla.getHead());
+                                System.out.println(x);
                                 htmlTotal += x;
                                 
                             }while(n_bst!=this.__bst.getHead());
-
-
                             
-                        out.writeUTF(htmlTotal);
+                            out.writeUTF(htmlTotal);
                         this.limpia_bandera();
                         } catch (Exception e) {
                             System.out.println(e + " EJECUCION DE ESTO");
                             String x = to_html_f();
-                            out.writeUTF(htmlTotal);
+                            if(htmlTotal.equals("")){out.writeUTF(x);
+                            }else{out.writeUTF(htmlTotal);}     
                         }
                         
                     }else if(message.contains("F@@@")){
+                        try{
                         String[] palabras = message.split("@@@")[1].split(" ");
-                    }else if (message.equals("FILECHOOSER")){
-                        //String x = to_html_f();
-                        //out.writeUTF(x);
-                        
+                        }catch(Exception e){
+                        System.out.println(e+"Error cargado la frase");
+                        String x = to_html_f();
+                        out.writeUTF(x);
+                        }
                     } else if (message.contains("PATH")){
+                        
                         System.out.println("Detects");
                         String m = message.substring(0, message.length() - 4);
                         System.out.println(m);
@@ -208,41 +219,46 @@ public class S_controlador {
                         this.documentos = FilesReader.readFiles();
                         String x = to_html_f();
                         out.writeUTF(x);
+                        
                     } else if (message.equals("Nombre")){
+                        
                         System.out.println("Se ordena por el nombre");
                         this.documentos = OrderFiles.OrderByNames();
                         String x = to_html_f();
                         out.writeUTF(x);
+                        
                     } else if (message.equals("Creacion")){
+                        
                         System.out.println("Se ordena por creacion");
                         this.documentos = OrderFiles.OrderByDate();
                         String x = to_html_f();
                         out.writeUTF(x);
+                        
                     } else if (message.equals("Palabras")){
+                        
                         System.out.println("Se ordena por cantidad de palabras");
                         this.documentos = OrderFiles.OrderByLength();
                         String x = to_html_f();
                         out.writeUTF(x);
-                    } else if (message.contains("ruta@")){
-                        String[] s = message.split("@");
-                        System.out.println(s[1]);
                         
+                    } else if (message.contains("ruta@")){
+                        
+                        String[] s = message.split("@");
                         AbrirArchivos.abrir(s[1]);
+                        //System.out.println(s[1]);
+                        
                     } else if (message.contains("variosarchivos")){
                         String[] s = message.split("-_-");
                         for(int i=1; i<s.length; i++){
                             System.out.println(s.length);
                             
                             System.out.println(s[i]);
-                            FileCopy.FileLoader(s[i]);  
-                            
-                             
+                            FileCopy.FileLoader(s[i]);    
                         }
                          this.documentos = FilesReader.readFiles();
                          String x = to_html_f();
                          out.writeUTF(x);
                          
-                        
                     } else{
                         this.documentos = FilesReader.readFiles();
                         String x = to_html_f();
@@ -304,7 +320,6 @@ public class S_controlador {
        
         String html_final = "";
         
-
             String id = tempData.getHead().getId();
             Nodo_D_E_C documento = (Nodo_D_E_C)(tempData.getHead());
             
@@ -321,14 +336,12 @@ public class S_controlador {
                     
                 }else if(!act.getFlag() && !closed){
                     html += "</font>";
-                    //html += " " + tempData.getHead().getId();
+                    html += " " + tempData.getHead().getId();
                     closed=true;
                     
-                }else if(act.getFlag() && !closed){
-                    html += " " + act.getId();
-                }else{
-                    html += " " + act.getId();
-                }
+                }else if(act.getFlag() && !closed){html += " " + act.getId();
+                
+                }else{html += " " + act.getId();}
                 
                 act = act.get_N();
             } while(act != tempData.getHead());
