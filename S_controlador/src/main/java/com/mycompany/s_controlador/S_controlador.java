@@ -222,7 +222,7 @@ public class S_controlador {
                         String x = to_html_f();
                         out.writeUTF(x);
                         
-                    } else if (message.equals("Nombre")){
+                    } else if (message.contains("Nombre")){
                         
                         System.out.println("Se ordena por el nombre");
                         this.documentos = OrderFiles.OrderByNames();

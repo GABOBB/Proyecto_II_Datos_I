@@ -28,30 +28,28 @@ public class OrderFiles {
         BigList = FilesReader.readFiles();
         return BigList; 
     }
+    @SuppressWarnings("empty-statement")
     public static Lista_D_E_C OrderByNames() throws IOException{
         //Lista_D_E_C BigList = new Lista_D_E_C();
         //BigList = FilesReader.readFiles();
         
         
-        Path fileName = Path.of("Biblioteca/ExistingFiles.txt");
-        String str = Files.readString(fileName);
-        
         Path timeName = Path.of("Biblioteca/TimeFiles.txt");
-        String tstr = Files.readString(timeName);
-        
+        String str = Files.readString(timeName);
+
         System.out.println("EXISTINGFILES");
         //System.out.println(str);
         String [] parts;
         parts = str.split("\n");
         System.out.println(parts.length);
-        
+
         String [] timeParts;
-        timeParts = tstr.split("\n");
-        
+        timeParts = str.split("\n");
+
         //System.out.println(parts.length)
-        
+
         parts = Quicksort.quickSort(parts);
-        
+
         File BibliotecaInfo = new File("Biblioteca/ExistingFiles.txt");
         FileWriter DocumentsWriter = new FileWriter(BibliotecaInfo, false);
         BufferedWriter DocumentsBw = new BufferedWriter(DocumentsWriter);
@@ -64,11 +62,11 @@ public class OrderFiles {
         DocumentsBw.write(parts[3].substring(0, parts[3].length() - 1));
         DocumentsBw.newLine();
         DocumentsBw.close();
-        
+
         File TimeInfo = new File("Biblioteca/TimeFiles.txt");
         FileWriter TimeWriter = new FileWriter(TimeInfo, false);
         BufferedWriter TimeBw = new BufferedWriter(TimeWriter);
-        
+
         for(int i = 0; i < parts.length; i++){
             for(int k = 0; k < timeParts.length; k++){
                 if(timeParts[k].contains(parts[i].substring(0, parts[i].length() - 1))){
@@ -80,7 +78,6 @@ public class OrderFiles {
         }
         TimeBw.close(); 
         return LoadBigList();
-        
     }
     public static Lista_D_E_C OrderByDate() throws IOException {
         Path fileName = Path.of("Biblioteca/ExistingFiles.txt");
