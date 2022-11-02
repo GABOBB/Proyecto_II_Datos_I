@@ -26,6 +26,11 @@ import estructuras_de_datos.Nodo_B;
 /**
  * @author Gabriel
  */
+
+/**
+ * Controlador de la pantalla donde se reproduce las playlists
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556, Gabriel 
+ */
 public class S_controlador {
     private Lista_D_E_C documentos = new Lista_D_E_C();
     private Lista_D_E_C __avl = new Lista_D_E_C();
@@ -158,27 +163,27 @@ public class S_controlador {
                             Nodo_D_E_C n_bst = this.__bst.getHead();
                             do{
                                 Arbol_B t_bst = (Arbol_B) n_bst.getData();
-                                System.out.println(t_bst.getId()+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");    
+                                  
                                 System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
                                 System.out.println(t_bst.buscarNodo(palabras[0]) + " ID");
                                 for(String TempStr : palabras){                               
                                 Nodo_B nodoInfo = t_bst.buscarNodo(TempStr);
   
-                                    Lista_D_E_C Marquito = (Lista_D_E_C) nodoInfo.getData();
-                                    Nodo_D_E_C Marquitos = (Nodo_D_E_C) Marquito.getHead();
+                                    Lista_D_E_C infoData = (Lista_D_E_C) nodoInfo.getData();
+                                    Nodo_D_E_C infoHead = (Nodo_D_E_C) infoData.getHead();
 
                                     do {
-                                        Nodo_D_E_C UltimoAux = (Nodo_D_E_C) Marquitos.getData();
+                                        Nodo_D_E_C UltimoAux = (Nodo_D_E_C) infoHead.getData();
                                         Nodo_D_E_C NodoAux = UltimoAux.get_N();
                                         Godzilla.setHead(NodoAux);
 
 
                                         NodoAux.setFlag(true);
-                                        System.out.println(NodoAux.getId() + "MAMAPICHAS");
-                                        Marquitos = Marquitos.get_N();
+                                        
+                                        infoHead = infoHead.get_N();
 
 
-                                    } while (Marquitos != Marquito.getHead());
+                                    } while (infoHead != infoData.getHead());
                                 }
 
 
@@ -338,7 +343,7 @@ public class S_controlador {
                     
                 }else if(!act.getFlag() && !closed){
                     html += "</font>";
-                    html += " " + tempData.getHead().getId();
+                   // html += " " + tempData.getHead().getId();
                     closed=true;
                     
                 }else if(act.getFlag() && !closed){html += " " + act.getId();
