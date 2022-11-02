@@ -83,10 +83,10 @@ public class S_controlador {
     
     private void cargar_a_avl(Nodo_D_E_C n_l, Arbol_AVL _avl){
         
-        Nodo_AVL n_avl = _avl.exist(n_l.getId(),n_l);
+        /* Nodo_AVL n_avl = _avl.exist(n_l.getId(),n_l);
         if(n_avl != null){
-            _avl.insert(n_avl.getId(), n_l);
-        }
+        _avl.insert(n_avl.getId(), n_l);
+        }*/
     }
     
     
@@ -184,7 +184,7 @@ public class S_controlador {
 
                                 n_bst = n_bst.get_N();
                                 
-                                String x = to_html_f(Godzilla);
+                                String x = to_html_f(Godzilla, t_bst.getId());
                                 
                                 htmlTotal += x;
                                 
@@ -318,11 +318,11 @@ public class S_controlador {
         //System.out.println(html_final);
         return html_final;
     }
-    private String to_html_f(Lista_D_E_C tempData){
+    private String to_html_f(Lista_D_E_C tempData,String id){
        
         String html_final = "";
         
-            String id = tempData.getHead().getId();
+            
             Nodo_D_E_C documento = (Nodo_D_E_C)(tempData.getHead());
             
             boolean closed = true;

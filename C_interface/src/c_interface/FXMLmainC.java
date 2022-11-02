@@ -89,6 +89,7 @@ public class FXMLmainC implements Initializable {
     @FXML
     private void bBb(ActionEvent event) {
         if(this.t_f.getText().equals("")){lable_mesage.setText("   _                  _\n      \\ _(•_•)_ /");}
+        else{lable_mesage.setText("");}
         if(this.modo_b){
             String d = this.t_f.getText();
             String html_text = __c.send("F@@@"+d);
