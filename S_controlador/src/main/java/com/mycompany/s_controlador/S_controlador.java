@@ -52,22 +52,20 @@ public class S_controlador {
             
             
             do {
-                //System.out.println(palabra.getId() + " ACTUAL");
-                
-                //ESTO ESTA BIEN COMO SE CARGA, EL ERROR ESTA ADENTRO :) 
-                
                 
                 cargar_a_bst(palabra.getId(),arbolBinario, palabra);
                 
                 System.out.println("Se Carga ID" + palabra.getId());
                 System.out.println("Se carga palabra" + palabra.get_N().get_N().getId());
-                
-                
                 palabra = palabra.get_N();
+                
             } while (palabra != palabras.getHead());
             Nodo_D_E_C nodo = new Nodo_D_E_C(__act.getId(), arbolBinario);
             System.out.println(nodo.getId() + "NODO QUE SE METE EN EL ARBOL");
+            
             this.__bst.add_n_last(nodo);
+            
+            
             __act = __act.get_N();
             System.out.println(__act.getId() + "ARCHIVO DE ARCHIVOS");
             
@@ -153,11 +151,7 @@ public class S_controlador {
                         Lista_D_E_C Godzilla = new Lista_D_E_C();
                         try {
                             Nodo_D_E_C n_bst = this.__bst.getHead();
-
-
-
                             do{
-
                                 Arbol_B t_bst = (Arbol_B) n_bst.getData();
                                 System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
                                 System.out.println(t_bst.buscarNodo(palabras[0]) + " ID");
@@ -183,8 +177,11 @@ public class S_controlador {
 
 
                                 n_bst = n_bst.get_N();
+                                
                                 String x = to_html_f(Godzilla);
+                                
                                 htmlTotal += x;
+                                
                             }while(n_bst!=this.__bst.getHead());
 
 
@@ -192,8 +189,9 @@ public class S_controlador {
                         out.writeUTF(htmlTotal);
                         this.limpia_bandera();
                         } catch (Exception e) {
+                            System.out.println(e + " EJECUCION DE ESTO");
                             String x = to_html_f();
-                            out.writeUTF(x);
+                            out.writeUTF(htmlTotal);
                         }
                         
                     }else if(message.contains("F@@@")){
@@ -205,6 +203,10 @@ public class S_controlador {
                     } else if (message.contains("PATH")){
                         System.out.println("Detects");
                         String m = message.substring(0, message.length() - 4);
+                        
+                        String x = to_html_f();
+                        out.writeUTF(x);
+                        
                         System.out.println(m);
                         FileCopy.FileLoader(m);
                     } else if (message.equals("Nombre")){
