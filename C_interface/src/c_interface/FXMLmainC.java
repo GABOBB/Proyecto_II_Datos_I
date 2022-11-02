@@ -45,7 +45,9 @@ public class FXMLmainC implements Initializable {
     private Button abrir_B;
     @FXML
     private Label lable_mesage;
-
+    @FXML
+    private Button Delete_F;
+    
 
     /**
      * Initializes the controller class.
@@ -132,5 +134,12 @@ public class FXMLmainC implements Initializable {
        String nombre=i.getText();
        System.out.println(nombre);
        this.__c.send("ruta@" +nombre);       
+    }
+    
+    @FXML
+    void DeleteFile(ActionEvent event) {
+       Tab i = __tabs.getSelectionModel().getSelectedItem();
+       String nombre = i.getText();
+       this.__c.send("ruta2@" + nombre);
     }
 }

@@ -4,16 +4,25 @@
  */
 package FilesLoader;
 
+import estructuras_de_datos.Lista_D_E_C;
+import estructuras_de_datos.Nodo_D_E_C;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Scanner;
 
 
 
@@ -74,5 +83,73 @@ public class FileCopy {
         FileWriter file = new FileWriter("Biblioteca/" + selectedFile.getName(), true);
         copyFileUsingStream(selectedFile, UserFile);//Se llama al metodo para copiar el archivo de la cancion en la ruta definida
         //return selectedFile.getAbsolutePath();
-    }    
+    }  
+    public static void FileErraser(String Path) throws FileNotFoundException, IOException{
+        Lista_D_E_C listFiles = listToFilesByLines("Biblioteca/ExistingFiles.txt");
+        Lista_D_E_C listDates = listToFilesByLines("Biblioteca/TimeFiles.txt");
+        
+        
+        File selectedFile = new File("Biblioteca/" + Path);
+        System.out.println("Biblioteca/"+ Path);
+        Path errPath = Paths.get(selectedFile.getAbsolutePath());
+        System.out.println(selectedFile.getAbsolutePath());
+        try {
+            Files.delete(errPath);
+        } catch (Exception e){
+            System.out.println("El error " + e);
+        }
+        
+        
+        
+        
+        File BibliotecaInfo = new File("Biblioteca/ExistingFiles.txt");
+        File TimeInfo = new File("Biblioteca/TimeFiles.txt");
+        
+        FileWriter DocumentsWriter = new FileWriter(BibliotecaInfo, false);
+        BufferedWriter DocumentsBw = new BufferedWriter(DocumentsWriter);
+        
+        FileWriter TimeWriter = new FileWriter(TimeInfo, false);
+        BufferedWriter TimeBw = new BufferedWriter(TimeWriter);
+        
+        
+        Nodo_D_E_C actual = listFiles.getHead();
+        do {
+        if(!actual.getId().contains(Path)){
+            System.out.println(actual.getId() + "Primer ID");
+            DocumentsBw.write(actual.getId());
+            DocumentsBw.newLine();
+        }
+        actual = actual.get_N();
+        } while (actual != listFiles.getHead());
+        
+        Nodo_D_E_C actual2 = listDates.getHead();
+        do {
+            if(!actual2.getId().contains(Path)){
+                System.out.println(actual2.getId() + "Segundo ID");
+                TimeBw.write(actual2.getId());
+                TimeBw.newLine();
+        }
+        actual2 = actual2.get_N();
+        
+        
+        } while (actual2 != listDates.getHead());
+        
+        DocumentsBw.close();
+        TimeBw.close();
+    }
+    public static Lista_D_E_C listToFilesByLines(String Path) throws FileNotFoundException{
+        
+        Lista_D_E_C list = new Lista_D_E_C();
+        File file = new File(Path);
+        Scanner scan = new Scanner(file);
+        
+        while(scan.hasNext()){
+            
+            String word = scan.next();
+            Nodo_D_E_C nodo = new Nodo_D_E_C(word);
+            list.add_n_last(nodo);
+            
+        }
+        return list;
+    }
 }

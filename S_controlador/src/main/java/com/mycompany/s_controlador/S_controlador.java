@@ -244,6 +244,11 @@ public class S_controlador {
                         AbrirArchivos.abrir(s[1]);
                         //System.out.println(s[1]);
                         
+                    } else if (message.contains("ruta2@")){
+                        String[] s = message.split("@");
+                        FileCopy.FileErraser(s[1]);
+                        System.out.println(s[1]);
+                        out.writeUTF("");
                     } else if (message.contains("variosarchivos")){
                         String[] s = message.split("-_-");
                         for(int i=1; i<s.length; i++){

@@ -70,7 +70,7 @@ public class ReadFile {
                 Nodo_D_E_C nodo = new Nodo_D_E_C(i);
                 list.add_n_last(nodo);
             }
-            
+            fis.close();
             return list;
             
         } catch (FileNotFoundException e) {
@@ -100,7 +100,7 @@ public class ReadFile {
                 Nodo_D_E_C nodo = new Nodo_D_E_C(i);
                 lista.add_n_last(nodo);
             }
-            
+            bf.close();
             return lista;
         }catch(IOException e){
             System.err.println(e);
