@@ -148,57 +148,48 @@ public class S_controlador {
                 
                     
                     if(message.contains("P@@@")){
+                        String htmlTotal = "";
                         String[] palabras = message.split("@@@")[1].split(" ");
                         Lista_D_E_C Godzilla = new Lista_D_E_C();
                         try {
-                        for(String i : palabras){
-                            System.out.println(i);
-                        }
-                        Nodo_D_E_C n_bst = this.__bst.getHead();
-                        
-                        do{
-                            //Arbol_AVL t_avl = (Arbol_AVL) n_avl.getData();
-                            Arbol_B t_bst = (Arbol_B) n_bst.getData();
-                            System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
-                            //t_bst.imprimirNodosDerechos();
-                            //System.out.println(t_bst.buscarNodoContenido("Proyecto"));
-                            System.out.println(t_bst.buscarNodo(palabras[0]) + " ID");
+                            Nodo_D_E_C n_bst = this.__bst.getHead();
+
+
+
+                            do{
+
+                                Arbol_B t_bst = (Arbol_B) n_bst.getData();
+                                System.out.println(t_bst.getSize() + "TAMAÑO ARBOL");
+                                System.out.println(t_bst.buscarNodo(palabras[0]) + " ID");
+                                for(String TempStr : palabras){                               
+                                Nodo_B nodoInfo = t_bst.buscarNodo(TempStr);
+  
+                                    Lista_D_E_C Marquito = (Lista_D_E_C) nodoInfo.getData();
+                                    Nodo_D_E_C Marquitos = (Nodo_D_E_C) Marquito.getHead();
+
+                                    do {
+                                        Nodo_D_E_C UltimoAux = (Nodo_D_E_C) Marquitos.getData();
+                                        Nodo_D_E_C NodoAux = UltimoAux.get_N();
+                                        Godzilla.setHead(NodoAux);
+
+
+                                        NodoAux.setFlag(true);
+                                        System.out.println(NodoAux.getId() + "MAMAPICHAS");
+                                        Marquitos = Marquitos.get_N();
+
+
+                                    } while (Marquitos != Marquito.getHead());
+                                }
+
+
+                                n_bst = n_bst.get_N();
+                                String x = to_html_f(Godzilla);
+                                htmlTotal += x;
+                            }while(n_bst!=this.__bst.getHead());
+
+
                             
-                            Nodo_B nodoInfo = t_bst.buscarNodo(palabras[0]);
-                            
-                            Lista_D_E_C Marquito = (Lista_D_E_C) nodoInfo.getData();
-                            Nodo_D_E_C Marquitos = (Nodo_D_E_C) Marquito.getHead();
-                            
-                            do {
-                                Nodo_D_E_C UltimoAux = (Nodo_D_E_C) Marquitos.getData();
-                                Nodo_D_E_C NodoAux = UltimoAux.get_N();
-                                Godzilla.setHead(NodoAux);
-                                
-                                
-                                NodoAux.setFlag(true);
-                                System.out.println(NodoAux.getId() + "MAMAPICHAS");
-                                Marquitos = Marquitos.get_N();
-                                
-                                
-                                System.out.println(Godzilla.getHead().getId() + " GODZILLA");
-                                System.out.println(Godzilla.getHead().get_N().getId()  + " GODZILLA");
-                                System.out.println(Godzilla.getHead().get_N().get_N().getId()  + " GODZILLA");
-                                System.out.println(Godzilla.getHead().get_N().get_N().get_N().getId()  + " GODZILLA");
-                                System.out.println(Godzilla.getHead().get_N().get_N().get_N().get_N().getId()  + " GODZILLA");
-                                
-                            } while (Marquitos != Marquito.getHead());
-                            
-                            //System.out.println("TIPO DE LISTA " + Godzilla.getHead().getData().getClass());
-                            //}
-                            //n_avl = n_avl.get_N();
-                            
-                            
-                            //n_bst = n_bst.get_N();
-                        }while(n_bst!=this.__bst.getHead());
-                        //String x = to_html_f();
-                        
-                        String x = to_html_f(Godzilla);
-                        out.writeUTF(x);
+                        out.writeUTF(htmlTotal);
                         this.limpia_bandera();
                         } catch (Exception e) {
                             String x = to_html_f();
@@ -311,10 +302,12 @@ public class S_controlador {
                     html += "<font color = red>";
                     html += " " + tempData.getHead().getId();
                     closed = false;
+                    
                 }else if(!act.getFlag() && !closed){
                     html += "</font>";
-                    html += " " + tempData.getHead().getId();
+                    //html += " " + tempData.getHead().getId();
                     closed=true;
+                    
                 }else if(act.getFlag() && !closed){
                     html += " " + act.getId();
                 }else{
