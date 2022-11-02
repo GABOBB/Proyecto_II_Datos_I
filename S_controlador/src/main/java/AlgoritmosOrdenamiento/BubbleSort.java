@@ -8,6 +8,11 @@ package AlgoritmosOrdenamiento;
  *
  * @author Rajat Mishra
  */
+
+/**
+ * clase para poder hacer un ordenamiento con buble sort
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556, gabriel 
+ */
 public class BubbleSort {
     public static void bubbleSort(long arr[])
     {

@@ -15,6 +15,10 @@ import java.util.Scanner;
  * @author RYZEN
  */
 public class FileInList {
+     /**
+     * Metodo para cargar un archivo en lista doblemente enlazada
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static DCLinkedList<String> LoadFileOfStringsIntoDCLinkedList(File file) throws FileNotFoundException {
             DCLinkedList<String> list = new DCLinkedList<>();
             Scanner scan = new Scanner(file);

@@ -33,6 +33,11 @@ import java.util.Scanner;
 public class FileCopy {
     static LocalTime localTime;
     static LocalDate localDate;
+    
+     /**
+     * Metodo para copiar archivos en una ruta especifica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static void copyFileUsingStream(File source, File dest) throws IOException {
         InputStream is = null;
         OutputStream os = null;
@@ -49,7 +54,10 @@ public class FileCopy {
             os.close();
         }
     }
-
+     /**
+     * Metodo para copiar los archivos en la bibliotec
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static void FileLoader(String Path) throws IOException, NullPointerException {
         System.out.println("FUNCIONA");
         localTime = LocalTime.now();
@@ -84,6 +92,11 @@ public class FileCopy {
         copyFileUsingStream(selectedFile, UserFile);//Se llama al metodo para copiar el archivo de la cancion en la ruta definida
         //return selectedFile.getAbsolutePath();
     }  
+    
+     /**
+     * Metodo para borrar en los txt
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static void FileErraser(String Path) throws FileNotFoundException, IOException{
         Lista_D_E_C listFiles = listToFilesByLines("Biblioteca/ExistingFiles.txt");
         Lista_D_E_C listDates = listToFilesByLines("Biblioteca/TimeFiles.txt");
@@ -137,6 +150,10 @@ public class FileCopy {
         DocumentsBw.close();
         TimeBw.close();
     }
+     /**
+     * Metodo para leer las listas lineas por lineas
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static Lista_D_E_C listToFilesByLines(String Path) throws FileNotFoundException{
         
         Lista_D_E_C list = new Lista_D_E_C();

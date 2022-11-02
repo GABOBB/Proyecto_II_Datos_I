@@ -19,6 +19,10 @@ import java.io.IOException;
  * @author RYZEN
  */
 public class FilesReader {
+     /**
+     * Metodo para leer los archivos
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static Lista_D_E_C readFiles() throws FileNotFoundException, IOException{
         Lista_D_E_C returnable = new Lista_D_E_C();
         Lista_D_E_C documents = FileToListByLines.leer_lineas("Biblioteca/ExistingFiles.txt");

@@ -8,6 +8,11 @@ package AlgoritmosOrdenamiento;
  *
  * @author https://stackoverflow.com/questions/29294982/using-quicksort-on-a-string-array
  */
+
+/**
+ * clase para poder hacer un ordenamiento con quick sort
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556, gabriel 
+ */
 public class Quicksort {
  /**
      * This method implements the Generic Quick Sort

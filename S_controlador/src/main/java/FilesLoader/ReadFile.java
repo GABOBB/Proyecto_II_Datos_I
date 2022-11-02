@@ -34,6 +34,11 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
  * @author Michael/Gabriel
  */
 public class ReadFile {
+    
+     /**
+     * Metodo para leer los archivos tipos pdf
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
 
     public static Lista_D_E_C readPdf(String files) throws IOException {
         Lista_D_E_C list = new Lista_D_E_C();
@@ -55,7 +60,10 @@ public class ReadFile {
         }
         return list;
     }
-    
+     /**
+     * Metodo para leer los archivos tipos docx
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static Lista_D_E_C readDocx(String files) throws IOException{
        
         Lista_D_E_C list = new Lista_D_E_C();
@@ -80,7 +88,10 @@ public class ReadFile {
         
            
     }
-    
+     /**
+     * Metodo para leer los archivos tipos txt
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static Lista_D_E_C readTxt(String __D){
         /**
          * se encarga de leer archivos txt
