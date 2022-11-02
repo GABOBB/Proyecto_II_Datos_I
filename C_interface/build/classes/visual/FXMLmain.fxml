@@ -19,6 +19,6 @@
       <ComboBox fx:id="Ordenamiento" layoutX="557.0" layoutY="9.0" onAction="#OrdenamientoArchivos" prefWidth="150.0" promptText="Ordenamiento" />
       <Button fx:id="abrir_B" layoutX="466.0" layoutY="9.0" mnemonicParsing="false" onAction="#abrir" text="Abrir Archivo" />
       <Button layoutX="399.0" layoutY="9.0" mnemonicParsing="false" onAction="#MultipleFile" text="Multiple" />
-      <Label fx:id="lable_mesage" layoutX="287.0" layoutY="2.0" prefHeight="34.0" prefWidth="110.0" />
+      <Label fx:id="lable_mesage" layoutX="287.0" layoutY="2.0" prefHeight="34.0" prefWidth="110.0" textAlignment="CENTER" />
    </children>
 </AnchorPane>

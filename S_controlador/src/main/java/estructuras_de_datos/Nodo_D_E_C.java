@@ -4,11 +4,11 @@ package estructuras_de_datos;
  * @author Gabriel
  */
 public class Nodo_D_E_C {
-    String id;//es la referencia por la cual se identifica el nodo
-    Object data;//es la informacion u objeto que contiene el nodo
-    boolean flag = false;
-    Nodo_D_E_C _N;//es el nodo siguiente en la lista
-    Nodo_D_E_C _P;//es el nodo anterios en la lista
+    private String id;//es la referencia por la cual se identifica el nodo
+    private Object data;//es la informacion u objeto que contiene el nodo
+    private boolean flag = false;
+    private Nodo_D_E_C _N;//es el nodo siguiente en la lista
+    private Nodo_D_E_C _P;//es el nodo anterios en la lista
     
     public Nodo_D_E_C(String id, Object data){//genera un nodo con informacion
         this.id = id;

@@ -39,7 +39,7 @@ public class S_controlador {
         new S_controlador();
     }
     
-    
+
     public void cargar(){
         try {
         this.documentos = FilesReader.readFiles();
@@ -51,8 +51,8 @@ public class S_controlador {
             Nodo_D_E_C palabra = palabras.getHead();
             
             
+            
             do {
-                
                 cargar_a_bst(palabra.getId(),arbolBinario, palabra);
                 
                 System.out.println("Se Carga ID" + palabra.getId());
@@ -100,6 +100,7 @@ public class S_controlador {
             Lista_D_E_C lista = new Lista_D_E_C();
             Nodo_D_E_C tempNodo = new Nodo_D_E_C(id);
             tempNodo.set_N(MiNodo);
+                                                
             NodoPalabra.setData(tempNodo);
             lista.add_n_last(NodoPalabra);
             Nodo_B nodoNuevo = new Nodo_B(NodoPalabra.getId(), lista);
@@ -184,11 +185,7 @@ public class S_controlador {
                                 n_bst = n_bst.get_N();
                                 
                                 String x = to_html_f(Godzilla);
-                                Nodo_D_E_C ACTUALP = Godzilla.getHead();
-                                do{
-                                    System.out.println(ACTUALP.getId()+ "");
-                                }while(ACTUALP != Godzilla.getHead());
-                                System.out.println(x);
+                                
                                 htmlTotal += x;
                                 
                             }while(n_bst!=this.__bst.getHead());
@@ -207,9 +204,9 @@ public class S_controlador {
                         String[] palabras = message.split("@@@")[1].split(" ");
                         }catch(Exception e){
                         System.out.println(e+"Error cargado la frase");
+                        }
                         String x = to_html_f();
                         out.writeUTF(x);
-                        }
                     } else if (message.contains("PATH")){
                         
                         System.out.println("Detects");
