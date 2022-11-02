@@ -9,66 +9,57 @@ package estructuras_de_datos;
  * @author Gabriel
  */
 public class Nodo_AVL {
-    public String __id;
-    public Object coincidencias;
-    public Nodo_AVL left; 
-    public Nodo_AVL right; 
+    String id; 
+    int ComparacionesAVL;
+    int pos, balan;
+    Nodo_AVL HIzq, HDer;
     
-    int height;
-    
-    public Object getData(){
-        return this.coincidencias;
+    public Nodo_AVL(String id, int pos, int ComparacionesAVL){
+        this.id = id;
+        this.pos = pos;
+        this.ComparacionesAVL = ComparacionesAVL;
+        this.balan = 0;
+        this.HIzq = null;
+        this.HDer = null;
     }
     
-    public Nodo_AVL(String id, Object coincidencia) {
-        this.__id = id;
-        this.coincidencias = coincidencia;
-        height = 1;
+    public int comparaciones(){
+        return ComparacionesAVL;
     }
-    
-    public Nodo_AVL(String id) {
-        this.__id = id;
-        height = 1;
+    public void ComparationsAVL(int ComparacionesAVL){
+        this.ComparacionesAVL = ComparacionesAVL;
     }
-    
     public String getId() {
-        return __id;
+        return id;
     }
-
-    public void setId(String __id) {
-        this.__id = __id;
+    public void setPalabra(String Id){
+        this.id = id;
     }
-
-    public Object getCoincidencias() {
-        return coincidencias;
+    public int getPos(){
+        return pos;
     }
-
-    public void setCoincidencias(Object coincidencias) {
-        this.coincidencias = coincidencias;
+    public void setPos(int Position){
+        this.pos = Position;
     }
-
-    public Nodo_AVL getLeft() {
-        return left;
+    public int getBal(){
+        return balan;
     }
-
-    public void setLeft(Nodo_AVL left) {
-        this.left = left;
+    public void setBalan(int Balan){
+        this.balan = Balan;
     }
-
-    public Nodo_AVL getRight() {
-        return right;
+    public Nodo_AVL get_HIzq(){
+        return HIzq;
     }
-
-    public void setRight(Nodo_AVL right) {
-        this.right = right;
+    public Nodo_AVL get_HDer(){
+        return HDer;
     }
-
-    public int getHeight() {
-        return height;
+    public void setIzq(Nodo_AVL HijoIzquierdo){
+        this.HIzq = HijoIzquierdo;
     }
-
-    public void setHeight(int height) {
-        this.height = height;
+    public void setDer(Nodo_AVL HijoDerecho){
+        this.HDer = HijoDerecho;
     }
+    
+    
     
 }

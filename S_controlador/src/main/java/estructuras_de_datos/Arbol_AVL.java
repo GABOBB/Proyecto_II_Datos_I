@@ -5,166 +5,137 @@ package estructuras_de_datos;
  * @author Gabriel
  */
 public class Arbol_AVL {
-    Nodo_AVL root;
-    
-    public int height(Nodo_AVL N) {
-        if (N == null)
-            return 0;
-        
-        return N.height;
+    private Nodo_AVL root; 
+    public Arbol_AVL(){
+        root = null;
     }
-    
-    private int max(int a, int b) {
-        return (a > b) ? a : b;
-    }
-    
-    public Nodo_AVL exist(String search,Nodo_D_E_C nodo){
-        Nodo_AVL temp = exist(this.root, search);
-        if(temp!=null){
-            Lista_D_E_C lis = (Lista_D_E_C) temp.getData();
-            lis.add_n_last(nodo);}
-        
-        return temp;
-    }
-    
-    private Nodo_AVL exist(Nodo_AVL root, String search){
-        //Lista_D_E_C lis1 = new Lista_D_E_C();
-        
-        if(root == null || (root.getId()).equals(search)){
-            return root;
-            
-        } else if (search.compareTo(root.getId()) > 0) {
-            
-            /*if (root.getId().contains(search)){
-            Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
-            lis1.add_n_last(nodo);
-            }*/
-            
-            return exist(root.right, search);
-            
-        } else if (search.compareTo(root.getId()) < 0) {
-            
-            /*if (root.getId().contains(search)){
-            Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
-            lis1.add_n_last(nodo);
-            }*/
-            
-            return exist(root.left, search);
-            
-        }
-        return null;
-    }
-    
-    public Lista_D_E_C buscar(String search){
-        Lista_D_E_C temp = buscar(this.root, search);
-        return temp;
-        }
-    
-    private Lista_D_E_C buscar(Nodo_AVL root, String search){
-        Lista_D_E_C lis1 = new Lista_D_E_C();
-        
-        if(root == null || (root.getId()).contains(search)){
-            return lis1;
-            
-        } else if (search.compareTo(root.getId()) > 0) {
-            
-            if (root.getId().contains(search)){
-            Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
-            lis1.add_n_last(nodo);
+    static Lista_D_E_C lista = new Lista_D_E_C();
+    public void buscar(Nodo_AVL aux, String id, Lista_D_E_C lista){
+        if (aux != null){
+            if (aux.id.equalsIgnoreCase(id)){
+                Nodo_D_E_C nodo = new Nodo_D_E_C(id);
+                lista.add_n_last(nodo);
+                aux = aux.HDer;
+                buscar(aux, id, lista);
+            } else {
+                if(id.compareTo(aux.id) <= 0){
+                    aux = aux.HIzq;
+                } else {
+                    aux = aux.HDer;
+                }
+                buscar(aux, id, lista);
             }
-            
-            return buscar(root.right, search);
-            
+        }
+    }
+    
+    public int obtenerBal(Nodo_AVL x){
+        if(x == null){
+            return -1;
         } else {
-            
-            if (root.getId().contains(search)){
-            Nodo_D_E_C nodo = new Nodo_D_E_C(root.__id,root.coincidencias);
-            lis1.add_n_last(nodo);
+            return x.balan;
+        }
+    }
+    
+    public Nodo_AVL rotIzq(Nodo_AVL c){
+        Nodo_AVL auxN = c.HIzq;
+        c.HIzq = auxN.HDer;
+        auxN.HDer = c;
+        c.balan = Math.max(obtenerBal(c.HIzq), obtenerBal(c.HDer)) + 1;
+        auxN.balan = Math.max(obtenerBal(auxN.HIzq), obtenerBal(auxN.HDer)) + 1;
+        return auxN;
+    }
+    
+    public Nodo_AVL rotDer(Nodo_AVL c){
+        Nodo_AVL auxN = c.HDer;
+        c.HDer = auxN.HIzq;
+        auxN.HIzq = c;
+        c.balan = Math.max(obtenerBal(c.HIzq), obtenerBal(c.HDer)) + 1;
+        auxN.balan = Math.max(obtenerBal(c.HIzq), obtenerBal(c.HDer)) + 1;
+        return auxN;
+    }
+    
+    public Nodo_AVL rotDobIzq(Nodo_AVL c){
+        Nodo_AVL auxN;
+        c.HIzq = rotDer(c.HIzq);
+        auxN = rotIzq(c);
+        return auxN;
+    }
+    
+    public Nodo_AVL rotDobDer(Nodo_AVL c){
+        Nodo_AVL auxN; 
+        c.HDer = rotIzq(c.HIzq);
+        auxN = rotDer(c);
+        return auxN;
+    }
+    
+    public Nodo_AVL NewIncert(Nodo_AVL nuevo, Nodo_AVL sub){
+        Nodo_AVL NPadre = sub;
+        if(nuevo.id.compareTo(sub.id) <= 0){
+            if(sub.HIzq == null){
+                sub.HIzq = nuevo;
+            } else {
+                sub.HIzq = NewIncert(nuevo, sub.HIzq);
+                if((obtenerBal(sub.HIzq) - obtenerBal(sub.HDer)) == 2){
+                    if(nuevo.id.compareTo(sub.HIzq.id) <0){
+                        NPadre = rotIzq(sub);
+                    } else {
+                        NPadre = rotDobIzq(sub);
+                    }
+                }
             }
-            
-            return buscar(root.left, search);
-            
+        } else if (nuevo.id.compareTo(sub.id) > 0){
+            if(sub.HDer == null){
+                sub.HDer = nuevo;
+            } else {
+                sub.HDer = NewIncert(nuevo, sub.HDer);
+                if ((obtenerBal(sub.HDer) - obtenerBal(sub.HIzq) == 2)){
+                    if(nuevo.id.compareTo(sub.HDer.id) > 0){
+                        NPadre = rotDer(sub);
+                    } else {
+                        NPadre = rotDobDer(sub);
+                    }
+                }
+            }
         }
+        if ((sub.HIzq == null) && (sub.HDer != null)){
+            sub.balan = sub.HDer.balan + 1;
+        } else if (sub.HDer == null && sub.HIzq != null){
+            sub.balan = sub.HIzq.balan + 1;
+        } else {
+            sub.balan = Math.max(obtenerBal(sub.HIzq), obtenerBal(sub.HDer)) + 1;
+        }
+        return NPadre;
     }
     
     
-   public Nodo_AVL rotacionDerecha(Nodo_AVL y){
-       Nodo_AVL x = y.left;
-       Nodo_AVL T2 = x.right;
-       
-       x.right = y;
-       y.left = T2;
-       
-       y.height = max(height(y.left), height(y.right)) + 1;
-       x.height = max(height(x.left), height(x.right)) + 1;
-       
-       return x;
-   }
-   public Nodo_AVL rotacionIzquierda (Nodo_AVL x){
-       Nodo_AVL y = x.right;
-       Nodo_AVL T2 = y.left;
-       
-       
-       y.left = x;
-       x.right = T2;
-       
-       x.height = max(height(x.left), height(x.right)) + 1;
-       y.height = max(height(y.left), height(x.right)) + 1;
-       
-       return y;
-   }
-   public int getBalance(Nodo_AVL N){
-       if (N == null)
-           return 0;
-       return height(N.left) - height(N.right);
-   }
-    public void insert(String key, Nodo_D_E_C nodo){
-        Nodo_AVL n_t = this.insert(root, key);
-        Lista_D_E_C lis = (Lista_D_E_C) n_t.coincidencias;
-        lis.add_n_last(nodo);
+    public void incert(String word, int pos){
+        Nodo_AVL nuevo = new Nodo_AVL(word, pos, 0);
+        if (root == null){
+            root = nuevo;
+        } else {
+            root = NewIncert(nuevo, root);
+        }
     }
-   
-   
-    private Nodo_AVL insert(Nodo_AVL node, String key) {
-        if (node == null)
-            return (new Nodo_AVL(key));
- 
-        if (key.compareTo(node.__id) > 0)
-            node.left = insert(node.left, key);
-        else if (key.compareTo(node.__id) < 0)
-            node.right = insert(node.right, key);
-        else 
-            return node;
-        node.height = 1 + max(height(node.left),
-                              height(node.right));
-        int balance = getBalance(node);
-
-        if (balance > 1 && key.compareTo(node.left.__id) > 0)
-            return rotacionDerecha(node);
- 
-        if (balance < -1 && key.compareTo(node.right.__id) < 0)
-            return rotacionIzquierda(node);
- 
-        if (balance > 1 && key.compareTo(node.left.__id) < 0) {
-            node.left = rotacionIzquierda(node.left);
-            return rotacionDerecha(node);
+    
+    static int CompararAVL = 0;
+    public void inOrder(Nodo_AVL r, String word, Lista_D_E_C lista){
+        CompararAVL++;
+        if ((r != null) && r.id.equalsIgnoreCase(word)){
+            r.ComparacionesAVL = CompararAVL;
+            Nodo_D_E_C node = new Nodo_D_E_C("");
+            node.setData(r);
+            CompararAVL = 0;
         }
- 
-        if (balance < -1 && key.compareTo(node.right.__id) > 0) {
-            node.right = rotacionDerecha(node.right);
-            return rotacionIzquierda(node);
-        }
- 
-        return node;
+        if (r != null){
+            inOrder(r.HIzq, word, lista);
+            System.out.println(r.id);
+            inOrder(r.HDer, word, lista);
+        } 
     }
- 
-    public void preOrder(Nodo_AVL node) {
-        if (node != null) {
-            System.out.print(node.__id + " ");
-            preOrder(node.left);
-            preOrder(node.right);
-        }
-    }   
+    
+    public Nodo_AVL getRoot(){
+        return this.root;
+    }
 }
 
    
